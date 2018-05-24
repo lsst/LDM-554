@@ -9,9 +9,9 @@
 
 %% Retrieve date and model version
 \setDocUpstreamLocation{MagicDraw SysML}
-\setDocUpstreamVersion{98}
+\setDocUpstreamVersion{130}
 
-\date{2018-05-08}
+\date{2018-05-24}
 
 %% Allow arbitrary latex to be inserted at the end of the document.
 %% Define a new version of this command in metadata.tex. It will
@@ -52,17 +52,6 @@ These requirements set out the major components of the LSST Science Platform (LS
 
 \subsection{Overview}
 
-\subsubsection{Abide by the Data Access Policies}
-
-\label{DMS-LSP-REQ-0007}
-\textbf{ID:} DMS-LSP-REQ-0007
-
-\textbf{Specification:}
-The LSP shall comply with the public data access policy and access restrictions defined by the LSST Project and operations organization.
-
-\textbf{Discussion:}
-This includes both the enforcement of Project-level data rights (e.g., to the Level 1 and Level 2 data) and user-provided access controls to user-created data (e.g., Level 3 data products).
-
 \subsubsection{Access to All Released or Authorized Data Products}
 
 \label{DMS-LSP-REQ-0001}
@@ -71,27 +60,16 @@ This includes both the enforcement of Project-level data rights (e.g., to the Le
 \textbf{Specification:}
 The LSP shall provide the capability to access all the Project's released data products, including, but not limited to, the data products enumerated in the DPDD (\citeds{LSE-163}), as well as all user data products to which a user has access.
 
-\subsubsection{API Aspect}
+\subsubsection{Portal Aspect}
 
-\label{DMS-LSP-REQ-0004}
-\textbf{ID:} DMS-LSP-REQ-0004
-
-\textbf{Specification:}
-The LSP shall provide a Web API for access to all the LSST data products and the user storage resources.
-
-\textbf{Discussion:}
-The Web API will use VO standards as much as is practical and supported by community expectations; see DMS-REQ-LSP-xxx below.  It may also include additional APIs to provide services unique to LSST.
-
-\subsubsection{Linkage of Aspects}
-
-\label{DMS-LSP-REQ-0005}
-\textbf{ID:} DMS-LSP-REQ-0005
+\label{DMS-LSP-REQ-0002}
+\textbf{ID:} DMS-LSP-REQ-0002
 
 \textbf{Specification:}
-The LSP shall facilitate access to the same LSST and user data through multiple aspects.
+The LSP shall provide a Web-based "Portal" means of access to all the LSST data products, and to user storage resources.
 
 \textbf{Discussion:}
-It should be possible to identify or create data in one aspect and retrieve it in another.  This requirement is satisfied principally by building the various aspects over the same underlying data services.
+The Portal is defined by further requirements.
 
 \subsubsection{Notebook Aspect}
 
@@ -104,16 +82,27 @@ The LSP shall provide an interactive Python computing environment, accessible th
 \textbf{Discussion:}
 The term "Notebook aspect" (and, \textit{a fortiori}, "Jupyter[Lab] aspect", which has also been used in DM discussions) refers to the reference implementation of this aspect of the LSP in terms of Jupyter notebooks and the forthcoming JupyterLab successor to that technology, with an IPython kernel back end. For the purposes of this requirements document, however, it seems preferable to avoid using an external brand name in the normative text.
 
-\subsubsection{Portal Aspect}
+\subsubsection{API (Data Access) Aspect}
 
-\label{DMS-LSP-REQ-0002}
-\textbf{ID:} DMS-LSP-REQ-0002
+\label{DMS-LSP-REQ-0004}
+\textbf{ID:} DMS-LSP-REQ-0004
 
 \textbf{Specification:}
-The LSP shall provide a Web-based "Portal" means of access to all the LSST data products, and to user storage resources.
+The LSP shall provide a Web API for access to all the LSST data products and the user storage resources.
 
 \textbf{Discussion:}
-The Portal is defined by further requirements.
+The Web API will use VO standards as much as is practical and supported by community expectations; see \hyperref[DMS-LSP-REQ-0006]{DMS-LSP-REQ-0006} below.  It may also include additional APIs to provide services unique to LSST.
+
+\subsubsection{Linkage of Aspects}
+
+\label{DMS-LSP-REQ-0005}
+\textbf{ID:} DMS-LSP-REQ-0005
+
+\textbf{Specification:}
+The LSP shall facilitate access to the same LSST and user data through multiple aspects.
+
+\textbf{Discussion:}
+It should be possible to identify or create data in one aspect and retrieve it in another.  This requirement is satisfied principally by building the various aspects over the same underlying data services.
 
 \subsubsection{Use of VO Standards}
 
@@ -128,187 +117,16 @@ The intent is to establish a "VO First" posture, and require explicit exception 
 This requirement applies most importantly to the API Aspect's externally-facing data access APIs, but also in other areas.
 E.g., from this requirement we may derive that the Portal must support access to externally-source reference catalog via VO-compliant queries, or that a Portal service for pushing data to user applications should support SAMP.
 
-\subsection{General}
+\subsubsection{Abide by the Data Access Policies}
 
-\subsubsection{Identity and Security}
-
-\paragraph{Acceptable Use Policy}\hfill  % Force subsequent text onto new line
-
-\label{DMS-LSP-REQ-0025}
-\textbf{ID:} DMS-LSP-REQ-0025
+\label{DMS-LSP-REQ-0007}
+\textbf{ID:} DMS-LSP-REQ-0007
 
 \textbf{Specification:}
-Non-project-staff users of the LSP shall be required to agree to and abide by an Acceptable Use Policy, to be determined by the LSST project or its operations organization, as a condition of access to any Project instance of the LSP.
+The LSP shall comply with the public data access policy and access restrictions defined by the LSST Project and operations organization.
 
 \textbf{Discussion:}
-The policies for project staff are set in other documents.
-
-\paragraph{Authenticated User Access}\hfill  % Force subsequent text onto new line
-
-\label{DMS-LSP-REQ-0020}
-\textbf{ID:} DMS-LSP-REQ-0020
-
-\textbf{Specification:}
-The functions and services of the LSP, including all three aspects, shall be available only to authenticated users, except where other requirements or other change-controlled specifications authorize or mandate otherwise.
-
-\paragraph{Common Identity}\hfill  % Force subsequent text onto new line
-
-\label{DMS-LSP-REQ-0022}
-\textbf{ID:} DMS-LSP-REQ-0022
-
-\textbf{Specification:}
-A user shall be able to use the same credentials to authenticate to all aspects of the LSP, and to receive access to any personal data or other state that is available cross-aspects.
-
-\textbf{Discussion:}
-This does not explicitly mandate "strong single-sign-on" in the sense that someone who has logged in to the Portal aspect can then proceed to the Notebook aspect without a separate login. (TBR: This behavior would be highly desirable and we may wish to adopt this as a requirement after all.) It \textit{does} require "weak single-sign-on" - the same credentials work everywhere.
-
-\paragraph{New-user Support}\hfill  % Force subsequent text onto new line
-
-\label{DMS-LSP-REQ-0021}
-\textbf{ID:} DMS-LSP-REQ-0021
-
-\textbf{Specification:}
-The Portal and Notebook aspects shall provide guidance to unauthenticated users as to how to establish an identity as usable for authentication to the LSP.
-
-\textbf{Discussion:}
-This could be as simple as a link to a "register for LSST access" page from the login screens of the Portal and Notebook.
-
-\paragraph{Privacy of User Activities}\hfill  % Force subsequent text onto new line
-
-\label{DMS-LSP-REQ-0027}
-\textbf{ID:} DMS-LSP-REQ-0027
-
-\textbf{Specification:}
-The LSP shall ensure that a user's activities on the LSP are not visible to other users without the originating user's explicit authorization.
-
-\textbf{Discussion:}
-Users will expect, for instance, that the queries they perform are not revealed to other users without their consent.
-
-\paragraph{Use of External Identity Providers}\hfill  % Force subsequent text onto new line
-
-\label{DMS-LSP-REQ-0023}
-\textbf{ID:} DMS-LSP-REQ-0023
-
-\textbf{Specification:}
-The LSP shall permit users to authenticate to the system using external credentials, from identity providers determined to be trusted by the LSST project or its operations organization.
-
-\textbf{Discussion:}
-This means that a user should be able to authenticate to an instance of the LSP using, for example, Github credentials, or credentials from a home institution.
-The policies for how LSST determines that an external user, with external credentials, has data rights and may establish an identity in LSST systems are set forth in other documents.
-
-\paragraph{Use of Multiple Sets of Credentials}\hfill  % Force subsequent text onto new line
-
-\label{DMS-LSP-REQ-0024}
-\textbf{ID:} DMS-LSP-REQ-0024
-
-\textbf{Specification:}
-The LSP shall permit users to associate multiple sets of credentials, from different providers, with the same identity within the LSP.
-
-\paragraph{Using secure protocols}\hfill  % Force subsequent text onto new line
-
-\label{DMS-LSP-REQ-0026}
-\textbf{ID:} DMS-LSP-REQ-0026
-
-\textbf{Specification:}
-All external connections to the LSP shall be encrypted using protocols and cipher suites compliant with LSST cybersecurity policy.
-
-\textbf{Discussion:}
-All connections from remote clients to LSST servers (including any web sockets to enable AJAX-like functionality) will be encrypted. It is expected that this will mean general use of "https:" protocols.
-Connections back out to external archives that do not support secure communications may be left unencrypted.
-
-\subsubsection{Performance Requirements}
-
-\paragraph{Peak Volume for Moderate-Sized Queries}\hfill  % Force subsequent text onto new line
-
-\label{DMS-LSP-REQ-0028}
-\textbf{ID:} DMS-LSP-REQ-0028
-
-\textbf{Specification:}
-The LSP shall handle at peak usage 50 simultaneous queries without degradation, with the following properties: input selection of up to 1E7 objects in the catalog, result data set of up to 0.1GB, and a response time of 10 seconds.
-
-\textbf{Discussion:}
-This is a DM requirement and not solely an SUIT requirement; a discussion needs to take place regarding the time budgeting for the all of the stages of the query: query generation, query running, results generation, display of results, and downloading and saving of results.
-
-\paragraph{Peak Volume for Queries on all Objects}\hfill  % Force subsequent text onto new line
-
-\label{DMS-LSP-REQ-0029}
-\textbf{ID:} DMS-LSP-REQ-0029
-
-\textbf{Specification:}
-The LSP shall handle at peak usage 20 simultaneous queries without degradation, with the following properties: input selection of up the entire object database, result data set of up to 6 GB, and a response time of one hour.
-
-\textbf{Discussion:}
-This is a DM requirement and not solely an SUIT requirement; a discussion needs to take place regarding the time budgeting for the all of the stages of the query: query generation, query running, results generation, display of results, and downloading and saving of results.
-
-\paragraph{Peak Volume of In-process Queries}\hfill  % Force subsequent text onto new line
-
-\label{DMS-LSP-REQ-0030}
-\textbf{ID:} DMS-LSP-REQ-0030
-
-\textbf{Specification:}
-The LSP shall simultaneously handle at peak usage 20 * 6 GB = 120 GB downloads
-
-\textbf{Discussion:}
-This is a DM requirement and not solely an SUIT requirement; a discussion needs to take place regarding the time budgeting for the all of the stages of the query: query generation, query running, results generation, display of results, and downloading and saving of results.
-
-\paragraph{Query Result Download Bandwidth}\hfill  % Force subsequent text onto new line
-
-\label{DMS-LSP-REQ-0031}
-\textbf{ID:} DMS-LSP-REQ-0031
-
-\textbf{Specification:}
-The LSP shall support a download rate of 6 Gbps for query results including results tables and images.
-
-\textbf{Discussion:}
-This is a DM requirement and not solely an SUIT requirement; a discussion needs to take place regarding the time budgeting for the all of the stages of the query: query generation, query running, results generation, display of results, and downloading and saving of results.
-
-\subsubsection{Implementation}
-
-\paragraph{Internet-Accessible (IPv4)}\hfill  % Force subsequent text onto new line
-
-\label{DMS-LSP-REQ-0033}
-\textbf{ID:} DMS-LSP-REQ-0033
-
-\textbf{Specification:}
-The LSP shall support access from the public Internet using IPv4 protocols.
-
-\textbf{Discussion:}
-This covers all three aspects of the LSP and thus both browser and other Web-API access.
-
-\paragraph{Internet-Accessible (IPv6)}\hfill  % Force subsequent text onto new line
-
-\label{DMS-LSP-REQ-0034}
-\textbf{ID:} DMS-LSP-REQ-0034
-
-\textbf{Specification:}
-The LSP shall support access from the public Internet using IPv6 protocols.
-
-\textbf{Discussion:}
-This covers all three aspects of the LSP and thus both browser and other Web-API access.
-
-\paragraph{Multiple installations}\hfill  % Force subsequent text onto new line
-
-\label{DMS-LSP-REQ-0032}
-\textbf{ID:} DMS-LSP-REQ-0032
-
-\textbf{Specification:}
-The LSP design shall facilitate the installation and maintenance of multiple instances of the LSP and shall support both instances that are accessible from the public Internet and instances that are accessible only within the LSST Project.
-
-\textbf{Discussion:}
-In addition to the public instances at the Project-provided Data Access Centers, it is expected that additional instances will be used to support internal processes such as commissioning.
-It is also desirable that the LSP be designed and implemented so that its components can readily be installed outside the Project-provided facilities (e.g., at IN2P3), but (TBR) this is not a formal requirement.
-
-\paragraph{System-Availability Indication}\hfill  % Force subsequent text onto new line
-
-\label{DMS-LSP-REQ-0035}
-\textbf{ID:} DMS-LSP-REQ-0035
-
-\textbf{Specification:}
-The LSP aspects shall provide means to inform users when their services are unavailable, including for reasons of maintenance or excessive load.
-
-\textbf{Discussion:}
-This is a DM requirement, not just a Science Platform requirement, as it interacts with lower-level system-availability issues.
-Even at LSP level this is a complicated problem, as availability of query services through the Portal, for instance, involves time budgeting and resource management for the all of the stages of the query: query generation, query running, results generation, display of results, and downloading and saving of results.
+This includes both the enforcement of Project-level data rights (e.g., to the Level 1 and Level 2 data) and user-provided access controls to user-created data (e.g., Level 3 data products).
 
 \subsection{Discover Data}
 
@@ -347,88 +165,38 @@ The LSP shall facilitate the transfer to the Notebook aspect of references allow
 \textbf{Discussion:}
 This allows a user to locate and preview data in the Portal environment and then readily transfer their work to the Notebook aspect for detailed analysis.
 
-\subsection{Query Data}
-
-\subsubsection{General Tabular Queries}
-
-\paragraph{Specific Query Types}\hfill  % Force subsequent text onto new line
-
-\subparagraph{Identifier Queries}\hfill  % Force subsequent text onto new line
-
-\subparagraph{Spatial Queries}\hfill  % Force subsequent text onto new line
-
-\textsc{Spatial Query Parameters}
-
-\textsc{Spatial Query Types}
-
-\subparagraph{Temporal Queries}\hfill  % Force subsequent text onto new line
-
-\subsubsection{Catalog Queries}
-
-\subsubsection{Image Metadata Queries}
-
-\subsubsection{Image Cutout Queries}
-
-\subsection{Display Data}
-
-\subsubsection{Display Tabular Data}
-
-\paragraph{Property Sheets}\hfill  % Force subsequent text onto new line
-
-\paragraph{Table Viewers}\hfill  % Force subsequent text onto new line
-
-\paragraph{Tabular Data Graphing}\hfill  % Force subsequent text onto new line
-
-\subsubsection{Display Image Data}
-
-\paragraph{Image Display Tools}\hfill  % Force subsequent text onto new line
-
-\paragraph{Image Overlays}\hfill  % Force subsequent text onto new line
-
-\subsubsection{All-Sky Visualization}
-
-\subsubsection{Coordinate Display Tools}
-
-\subsection{Exploration and Analysis}
-
-\subsubsection{Table Manipulation}
-
-\subsubsection{Image Manipulation}
-
-\subsubsection{Special Workflows}
-
 \subsection{User Storage}
 
-\subsubsection{User Database Access Controls}
-
-\label{DMS-LSP-REQ-0013}
-\textbf{ID:} DMS-LSP-REQ-0013
-
-\textbf{Specification:}
-The LSP shall permit users to place access restrictions on user databases, based on both user and user-group identities, and shall enforce these restrictions in all its aspects.
-
-\subsubsection{User Databases (Level 3 Data Products)}
-
-\label{DMS-LSP-REQ-0012}
-\textbf{ID:} DMS-LSP-REQ-0012
-
-\textbf{Specification:}
-The LSP shall provide for the creation, use, and management of user databases (Level 3 tabular data products), and shall enable interaction with user databases with the same facilities as for Project-created database to the extent feasible.
-
-\textbf{Discussion:}
-Some database-related capabilities of the LSP rely on the availability of detailed metadata on the Project-created databases that goes beyond the normal content of a database schema (e.g., IVOA UCDs for table columns).  Users will be enabled, but not required, to supply such metadata for their own databases (and they may do so incorrectly), so LSP functionality that depends on it may not be available for user databases.
-
-\subsubsection{User Workspace}
+\subsubsection{User File Workspace}
 
 \label{DMS-LSP-REQ-0011}
 \textbf{ID:} DMS-LSP-REQ-0011
 
 \textbf{Specification:}
-The LSP shall provide a "User Workspace": resources for the storage of user-generated data, which shall be accessible from all three aspects.
+The LSP shall provide a "User File Workspace": resources for the storage of file oriented User Generated data, which shall be accessible from all three aspects.
 
 \textbf{Discussion:}
-All users with data rights will have a "birthright" quota of User Workspace storage.  A proposal-based process will be available for requests for additional storage.  The Workspace will not, in general, place constraints on the format of the data stored.  It may be used for image data as well as for tabular data in file-oriented storage forms.  User databases are a separate mechanism.
+All users with data rights will have a "birthright" quota of User File Workspace storage.  A proposal-based process will be available for requests for additional storage.  The Workspace will not, in general, place constraints on the format of the data stored.  It may be used for image data as well as for tabular data in file-oriented storage forms.  User databases are a separate mechanism.
 The Workspace is expected to be made available through an implementation of the IVOA VOSpace standard.
+
+\subsubsection{User Database Workspace}
+
+\label{DMS-LSP-REQ-0012}
+\textbf{ID:} DMS-LSP-REQ-0012
+
+\textbf{Specification:}
+The LSP shall provide for the creation, use, and management of user databases (User Generated tabular data products), and shall enable interaction with user databases with the same facilities as for Project-created database to the extent feasible.
+
+\textbf{Discussion:}
+Some database-related capabilities of the LSP rely on the availability of detailed metadata on the Project-created databases that goes beyond the normal content of a database schema (e.g., IVOA UCDs for table columns).  Users will be enabled, but not required, to supply such metadata for their own databases (and they may do so incorrectly), so LSP functionality that depends on it may not be available for user databases.
+
+\subsubsection{User Workspace Access Controls}
+
+\label{DMS-LSP-REQ-0013}
+\textbf{ID:} DMS-LSP-REQ-0013
+
+\textbf{Specification:}
+The LSP shall permit users to place access restrictions on data in the User File and Database Workspaces, based on both user and user-group identities, and shall enforce these restrictions in all its aspects.
 
 \subsection{Transfer Data}
 
@@ -443,16 +211,24 @@ The LSP shall provide means for downloading data resulting from queries or other
 \textbf{Discussion:}
 In general the API aspect can be used to retrieve data to remote sites.  Additional mechanisms will be provided as appropriate to the various aspects, and are described in lower-level requirements.  For the DAC instances of the LSP, the "user's system" will generally be on the public Internet; for other instances it may be on project-internal systems.
 
-\subsubsection{Image Data Download File Format}
+\subsubsection{Upload Data}
 
-\label{DMS-LSP-REQ-0018}
-\textbf{ID:} DMS-LSP-REQ-0018
+\label{DMS-LSP-REQ-0015}
+\textbf{ID:} DMS-LSP-REQ-0015
 
 \textbf{Specification:}
-The LSP shall allow LSST image data products to be downloaded or saved to the workspace as FITS files including the appropriate metadata.
+The LSP shall provide means for uploading data from the user's system for use in the LSP aspects, including for storage in the Workspace.
+
+\subsubsection{Transfer Data to Workspace}
+
+\label{DMS-LSP-REQ-0016}
+\textbf{ID:} DMS-LSP-REQ-0016
+
+\textbf{Specification:}
+Transfer of data to and from the Workspace shall be usable as an alternative in all features of the LSP where download or upload, respectively, are available.
 
 \textbf{Discussion:}
-This needs some discussion as to what other formats we may want and must be readable by future releases.
+The user can "download" data, e.g., a query result, to the Workspace, and can "upload" data from the Workspace into other functions of the LSP, e.g., to use as a target list in a multi-object search.
 
 \subsubsection{Tabular Data Download File Formats}
 
@@ -466,24 +242,62 @@ The LSP shall allow tabular search results, including but not limited to data fr
 A final set of formats needs to be discussed and approved by the Project.
 This is primarily a requirement on the API aspect and the DAX services.
 
-\subsubsection{Transfer Data to Workspace}
+\subsubsection{Image Data Download File Format}
 
-\label{DMS-LSP-REQ-0016}
-\textbf{ID:} DMS-LSP-REQ-0016
+\label{DMS-LSP-REQ-0018}
+\textbf{ID:} DMS-LSP-REQ-0018
 
 \textbf{Specification:}
-Transfer of data to and from the Workspace shall be usable as an alternative in all features of the LSP where download or upload, respectively, are available.
+The LSP shall allow LSST image data products to be downloaded or saved to the workspace as FITS files including the appropriate metadata.
 
 \textbf{Discussion:}
-The user can "download" data, e.g., a query result, to the Workspace, and can "upload" data from the Workspace into other functions of the LSP, e.g., to use as a target list in a multi-object search.
+This needs some discussion as to what other formats we may want and must be readable by future releases.
 
-\subsubsection{Upload Data}
+\subsection{Performance}
 
-\label{DMS-LSP-REQ-0015}
-\textbf{ID:} DMS-LSP-REQ-0015
+\subsubsection{Peak Volume for Moderate-Sized Queries}
+
+\label{DMS-LSP-REQ-0028}
+\textbf{ID:} DMS-LSP-REQ-0028
 
 \textbf{Specification:}
-The LSP shall provide means for uploading data from the user's system for use in the LSP aspects, including for storage in the Workspace.
+The LSP shall handle at peak usage 50 simultaneous queries without degradation, with the following properties: input selection of up to 1E7 objects in the catalog, result data set of up to 0.1GB, and a response time of 10 seconds.
+
+\textbf{Discussion:}
+This requirement flows down from several requirements in the DMSR (\citeds{LSE-61}) which constrain both the performance of the database systems (via \citeds{LDM-555}) and the Science Platform.  In the Science Platform context, this requirement implies that the LSP will not degrade the performance supported by the underlying database systems.  This applies to queries originating from any of the Aspects, and covers all of the stages of the query: query generation, query running, results generation, display of results, and downloading and saving of results.
+
+\subsubsection{Peak Volume for Queries on all Objects}
+
+\label{DMS-LSP-REQ-0029}
+\textbf{ID:} DMS-LSP-REQ-0029
+
+\textbf{Specification:}
+The LSP shall handle at peak usage 20 simultaneous queries without degradation, with the following properties: input selection of up the entire object database, result data set of up to 6 GB, and a response time of one hour.
+
+\textbf{Discussion:}
+This requirement flows down from several requirements in the DMSR (\citeds{LSE-61}) which constrain both the performance of the database systems (via \citeds{LDM-555}) and the Science Platform.  In the Science Platform context, this requirement implies that the LSP will not degrade the performance supported by the underlying database systems.  This applies to queries originating from any of the Aspects, and covers all of the stages of the query: query generation, query running, results generation, display of results, and downloading and saving of results.
+
+\subsubsection{Peak Volume of In-process Queries}
+
+\label{DMS-LSP-REQ-0030}
+\textbf{ID:} DMS-LSP-REQ-0030
+
+\textbf{Specification:}
+The LSP shall simultaneously handle at peak usage 20 * 6 GB = 120 GB downloads
+
+\textbf{Discussion:}
+This requirement flows down from several requirements in the DMSR (\citeds{LSE-61}) which constrain both the performance of the database systems (via \citeds{LDM-555}) and the Science Platform.  In the Science Platform context, this requirement implies that the LSP will not degrade the performance supported by the underlying database systems.  This applies to queries originating from any of the Aspects, and covers all of the stages of the query: query generation, query running, results generation, display of results, and downloading and saving of results.
+
+\subsubsection{Query Result Download Bandwidth}
+
+\label{DMS-LSP-REQ-0031}
+\textbf{ID:} DMS-LSP-REQ-0031
+
+\textbf{Specification:}
+The LSP shall support a download rate of 6 Gbps for query results including results tables and images.
+
+\textbf{Discussion:}
+This requirement flows down from several requirements in the DMSR (\citeds{LSE-61}) which constrain both the performance of the database systems (via \citeds{LDM-555}) and the Science Platform.  In the Science Platform context, this requirement implies that the LSP will not degrade the performance supported by the underlying database systems.  This applies to queries originating from any of the Aspects, and covers all of the stages of the query: query generation, query running, results generation, display of results, and downloading and saving of results.
 
 \subsection{Control and Management}
 
@@ -498,6 +312,142 @@ The LSP shall provide means for uploading data from the user's system for use in
 
 \textbf{Specification:}
 The LSP shall provide user and reference documentation for all its aspects.
+
+\subsection{General}
+
+\subsubsection{Identity and Security}
+
+\paragraph{Authenticated User Access}\hfill  % Force subsequent text onto new line
+
+\label{DMS-LSP-REQ-0020}
+\textbf{ID:} DMS-LSP-REQ-0020
+
+\textbf{Specification:}
+The functions and services of the LSP, including all three aspects, shall be available only to authenticated users, except where other requirements or other change-controlled specifications authorize or mandate otherwise.
+
+\paragraph{New-user Support}\hfill  % Force subsequent text onto new line
+
+\label{DMS-LSP-REQ-0021}
+\textbf{ID:} DMS-LSP-REQ-0021
+
+\textbf{Specification:}
+The Portal and Notebook aspects shall provide guidance to unauthenticated users as to how to establish an identity as usable for authentication to the LSP.
+
+\textbf{Discussion:}
+This could be as simple as a link to a "register for LSST access" page from the login screens of the Portal and Notebook.
+
+\paragraph{Common Identity}\hfill  % Force subsequent text onto new line
+
+\label{DMS-LSP-REQ-0022}
+\textbf{ID:} DMS-LSP-REQ-0022
+
+\textbf{Specification:}
+A user shall be able to use the same credentials to authenticate to all aspects of the LSP, and to receive access to any personal data or other state that is available cross-aspects.
+
+\textbf{Discussion:}
+This does not explicitly mandate "strong single-sign-on" in the sense that someone who has logged in to the Portal aspect can then proceed to the Notebook aspect without a separate login. (TBR: This behavior would be highly desirable and we may wish to adopt this as a requirement after all.) It \textit{does} require "weak single-sign-on" - the same credentials work everywhere.
+
+\paragraph{Use of External Identity Providers}\hfill  % Force subsequent text onto new line
+
+\label{DMS-LSP-REQ-0023}
+\textbf{ID:} DMS-LSP-REQ-0023
+
+\textbf{Specification:}
+The LSP shall permit users to authenticate to the system using external credentials, from identity providers determined to be trusted by the LSST project or its operations organization.
+
+\textbf{Discussion:}
+This means that a user should be able to authenticate to an instance of the LSP using, for example, Github credentials, or credentials from a home institution.
+The policies for how LSST determines that an external user, with external credentials, has data rights and may establish an identity in LSST systems are set forth in other documents.
+
+\paragraph{Use of Multiple Sets of Credentials}\hfill  % Force subsequent text onto new line
+
+\label{DMS-LSP-REQ-0024}
+\textbf{ID:} DMS-LSP-REQ-0024
+
+\textbf{Specification:}
+The LSP shall permit users to associate multiple sets of credentials, from different providers, with the same identity within the LSP.
+
+\paragraph{Acceptable Use Policy}\hfill  % Force subsequent text onto new line
+
+\label{DMS-LSP-REQ-0025}
+\textbf{ID:} DMS-LSP-REQ-0025
+
+\textbf{Specification:}
+Non-project-staff users of the LSP shall be required to agree to and abide by an Acceptable Use Policy, to be determined by the LSST project or its operations organization, as a condition of access to any Project instance of the LSP.
+
+\textbf{Discussion:}
+The policies for project staff are set in other documents.
+
+\paragraph{Using secure protocols}\hfill  % Force subsequent text onto new line
+
+\label{DMS-LSP-REQ-0026}
+\textbf{ID:} DMS-LSP-REQ-0026
+
+\textbf{Specification:}
+All external connections to the LSP shall be encrypted using protocols and cipher suites compliant with LSST cybersecurity policy.
+
+\textbf{Discussion:}
+All connections from remote clients to LSST servers (including any web sockets to enable AJAX-like functionality) will be encrypted. It is expected that this will mean general use of "https:" protocols.
+Connections back out to external archives that do not support secure communications may be left unencrypted.
+
+\paragraph{Privacy of User Activities}\hfill  % Force subsequent text onto new line
+
+\label{DMS-LSP-REQ-0027}
+\textbf{ID:} DMS-LSP-REQ-0027
+
+\textbf{Specification:}
+The LSP shall ensure that a user's activities on the LSP are not visible to other users without the originating user's explicit authorization.
+
+\textbf{Discussion:}
+Users will expect, for instance, that the queries they perform are not revealed to other users without their consent.
+
+\subsubsection{Implementation}
+
+\paragraph{Multiple installations}\hfill  % Force subsequent text onto new line
+
+\label{DMS-LSP-REQ-0032}
+\textbf{ID:} DMS-LSP-REQ-0032
+
+\textbf{Specification:}
+The LSP design shall facilitate the installation and maintenance of multiple instances of the LSP and shall support both instances that are accessible from the public Internet and instances that are accessible only within the LSST Project.
+
+\textbf{Discussion:}
+In addition to the public instances at the Project-provided Data Access Centers, it is expected that additional instances will be used to support internal processes such as commissioning.
+It is also desirable that the LSP be designed and implemented so that its components can readily be installed outside the Project-provided facilities (e.g., at IN2P3), but (TBR) this is not a formal requirement.
+
+\paragraph{Internet-Accessible (IPv4)}\hfill  % Force subsequent text onto new line
+
+\label{DMS-LSP-REQ-0033}
+\textbf{ID:} DMS-LSP-REQ-0033
+
+\textbf{Specification:}
+The LSP shall support access from the public Internet using IPv4 protocols.
+
+\textbf{Discussion:}
+This covers all three aspects of the LSP and thus both browser and other Web-API access.
+
+\paragraph{Internet-Accessible (IPv6)}\hfill  % Force subsequent text onto new line
+
+\label{DMS-LSP-REQ-0034}
+\textbf{ID:} DMS-LSP-REQ-0034
+
+\textbf{Specification:}
+The LSP shall support access from the public Internet using IPv6 protocols.
+
+\textbf{Discussion:}
+This covers all three aspects of the LSP and thus both browser and other Web-API access.
+
+\paragraph{System-Availability Indication}\hfill  % Force subsequent text onto new line
+
+\label{DMS-LSP-REQ-0035}
+\textbf{ID:} DMS-LSP-REQ-0035
+
+\textbf{Specification:}
+The LSP aspects shall provide means to inform users when their services are unavailable, including for reasons of maintenance or excessive load.
+
+\textbf{Discussion:}
+This is a DM requirement, not just a Science Platform requirement, as it interacts with lower-level system-availability issues.
+Even at LSP level this is a complicated problem, as availability of query services through the Portal, for instance, involves time budgeting and resource management for the all of the stages of the query: query generation, query running, results generation, display of results, and downloading and saving of results.
 
 \section{Portal}
 
@@ -514,39 +464,42 @@ The Portal aspect shall be accessible through commonly used desktop web browsers
 \textbf{Discussion:}
 The supported browsers will be documented by the Project.
 
-\subsection{General}
-
-\subsubsection{Identity and Security}
-
-\subsubsection{Performance Requirements}
-
-Substantially more work needs to be done on codifying performance requirement for the components of the LSP.
-
-\subsubsection{Implementation}
-
-\paragraph{System-Busy Indication}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0126}
-\textbf{ID:} DMS-PRTL-REQ-0126
-
-\textbf{Specification:}
-The Portal aspect shall provide a means to inform users when elements of the system are unavailable.
-
-\textbf{Discussion:}
-This might be due to maintenance or to excessive load.
-
-\paragraph{Tolerance of Production Database Changes}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0125}
-\textbf{ID:} DMS-PRTL-REQ-0125
-
-\textbf{Specification:}
-The Portal aspect shall be designed to facilitate accommodation of database expansion and changes and metadata extension and changes associated with the evolution of the Level 1 data, Level 2 data releases, and other planned data sources.
-
-\textbf{Discussion:}
-The LSP needs to accommodate the database changes associated with Level 1 and Level 2 updates; this also has implications for DAX - see the "Discovery and Reflection APIs" requirement - and for the availability of the data as they are released with the processing (nightly and annually).  This requires stability for the APIs (web and client), and usability of the Portal across releases (and for multiple releases).
-
 \subsection{Discover Data}
+
+\subsubsection{Portal Discovery of all Data Products}
+
+\label{DMS-PRTL-REQ-0002}
+\textbf{ID:} DMS-PRTL-REQ-0002
+
+\textbf{Specification:}
+The Portal aspect shall provide the capability to discover and access all the Project's released data products, including, but not limited to, the data products enumerated in the DPDD (\citeds{LSE-163}), the calibration database, and the Reformatted EFD, as well as all user data products to which a user has access.
+
+\textbf{Discussion:}
+The Portal's workflows should allow a user to learn what data exist: what data releases are available, what image and catalog data they contain, the names of all databases, tables, and columns, etc.
+For all tabular data products the Generic Query requirements below cover the basic level of access provided.
+
+\subsubsection{Portal Access to Workspace}
+
+\label{DMS-PRTL-REQ-0003}
+\textbf{ID:} DMS-PRTL-REQ-0003
+
+\textbf{Specification:}
+The Portal aspect shall have the capability to discover all data in the user's Workspace.
+
+\textbf{Discussion:}
+This will allow for data and images to be retrieved from the environment for use within the portal.
+
+\subsubsection{Semantic Linkage: Portal Workflows}
+
+\label{DMS-PRTL-REQ-0004}
+\textbf{ID:} DMS-PRTL-REQ-0004
+
+\textbf{Specification:}
+The Portal aspect shall provide for the identification and retrieval of semantically linked data.
+
+\textbf{Discussion:}
+The Portal should provide straightforward UI workflows for starting from a selected data item (image or catalog entry) and identifying related data, including both direct data-dependency and provenance linkages and more scientifically oriented linkages such as the ability to navigate from an Object to its associated ForcedSources.
+Some of these linkages will be supported by the automatic exploitation of metadata exposed through the underlying data access APIs; others will be specifically designed workflows reflecting scientific understanding of the relationships among LSST data products and their processing.
 
 \subsubsection{Access to Calibration Products}
 
@@ -555,6 +508,17 @@ The LSP needs to accommodate the database changes associated with Level 1 and Le
 
 \textbf{Specification:}
 The Portal aspect shall enable access to Project calibration data products, both directly and via linkages from science data products generated using them.
+
+\textbf{Discussion:}
+This is a sub-requirement of "Semantic Linkage: Portal" that carries forward a specific requirement originating from early SUIT specifications.
+
+\subsubsection{Coadded Image to Single-Epoch Image Associations}
+
+\label{DMS-PRTL-REQ-0006}
+\textbf{ID:} DMS-PRTL-REQ-0006
+
+\textbf{Specification:}
+The Portal aspect shall facilitate users following the associations between coadded images and the single epoch images that were used to generate them.
 
 \textbf{Discussion:}
 This is a sub-requirement of "Semantic Linkage: Portal" that carries forward a specific requirement originating from early SUIT specifications.
@@ -581,53 +545,19 @@ The Portal aspect shall provide a network API that allows authenticated remote a
 \textbf{Discussion:}
 Access to the list of queries allows user code in the Notebook aspect to use those query references to retrieve the data which was being explored in the Portal.
 
-\subsubsection{Coadded Image to Single-Epoch Image Associations}
-
-\label{DMS-PRTL-REQ-0006}
-\textbf{ID:} DMS-PRTL-REQ-0006
-
-\textbf{Specification:}
-The Portal aspect shall facilitate users following the associations between coadded images and the single epoch images that were used to generate them.
-
-\textbf{Discussion:}
-This is a sub-requirement of "Semantic Linkage: Portal" that carries forward a specific requirement originating from early SUIT specifications.
-
-\subsubsection{Portal Access to Workspace}
-
-\label{DMS-PRTL-REQ-0003}
-\textbf{ID:} DMS-PRTL-REQ-0003
-
-\textbf{Specification:}
-The Portal aspect shall have the capability to discover all data in the user's Workspace.
-
-\textbf{Discussion:}
-This will allow for data and images to be retrieved from the environment for use within the portal.
-
-\subsubsection{Portal Discovery of all Data Products}
-
-\label{DMS-PRTL-REQ-0002}
-\textbf{ID:} DMS-PRTL-REQ-0002
-
-\textbf{Specification:}
-The Portal aspect shall provide the capability to discover and access all the Project's released data products, including, but not limited to, the data products enumerated in the DPDD (\citeds{LSE-163}), the calibration database, and the Reformatted EFD, as well as all user data products to which a user has access.
-
-\textbf{Discussion:}
-The Portal's workflows should allow a user to learn what data exist: what data releases are available, what image and catalog data they contain, the names of all databases, tables, and columns, etc.
-For all tabular data products the Generic Query requirements below cover the basic level of access provided.
-
-\subsubsection{Semantic Linkage: Portal Workflows}
-
-\label{DMS-PRTL-REQ-0004}
-\textbf{ID:} DMS-PRTL-REQ-0004
-
-\textbf{Specification:}
-The Portal aspect shall provide for the identification and retrieval of semantically linked data.
-
-\textbf{Discussion:}
-The Portal should provide straightforward UI workflows for starting from a selected data item (image or catalog entry) and identifying related data, including both direct data-dependency and provenance linkages and more scientifically oriented linkages such as the ability to navigate from an Object to its associated ForcedSources.
-Some of these linkages will be supported by the automatic exploitation of metadata exposed through the underlying data access APIs; others will be specifically designed workflows reflecting scientific understanding of the relationships among LSST data products and their processing.
-
 \subsection{Query Data}
+
+\subsubsection{Support Synchronous and Asynchronous Queries}
+
+\label{DMS-PRTL-REQ-0009}
+\textbf{ID:} DMS-PRTL-REQ-0009
+
+\textbf{Specification:}
+The Portal aspect shall provide UI models for both synchronous and asynchronous queries, based on user preference, loading, and resource capabilities.
+
+\textbf{Discussion:}
+This Portal capability should include an interface to initiate, monitor, and control the execution of both sync and async queries, as well as browse their results. Long running queries may be forced to be asynchronous.
+There is not a 1:1 relationship between this Portal capability and the analogous capability in the API aspect; for instance, the Portal may provide UI support for placing a long-running, technically synchronous (from the DAX perspective), query into the background from the user's perspective.
 
 \subsubsection{Long Query Backgrounding}
 
@@ -639,6 +569,28 @@ The Portal aspect shall notify the user if a query is estimated to take longer t
 
 \textbf{Discussion:}
 This requirement arose from user panel feedback and the original SUIT requirements review.  It requires support from DAX/database for query estimation and that is still TBD.  Having the query "in the background" refers to the user's perspective of being able to proceed with other work while waiting for it to complete, and may or may not involve a truly asynchronous DAX query.
+
+\subsubsection{Query Status and Termination Notification}
+
+\label{DMS-PRTL-REQ-0011}
+\textbf{ID:} DMS-PRTL-REQ-0011
+
+\textbf{Specification:}
+The Portal aspect shall notify the user of the status of the database query including if the query had been terminated for any reason.
+
+\textbf{Discussion:}
+There needs to be an operations discussion about when and why database queries are terminated, and what sorts of notifications will be generated by DAX in such cases.
+
+\subsubsection{Query Results Size Limitation}
+
+\label{DMS-PRTL-REQ-0012}
+\textbf{ID:} DMS-PRTL-REQ-0012
+
+\textbf{Specification:}
+The Portal aspect shall have a mechanism to notify a user that a query result has exceeded threshold(s) for the maximum results size allowed and that the query has been terminated or disallowed.
+
+\textbf{Discussion:}
+Again, the underlying DAX support for this needs to be understood.
 
 \subsubsection{Query History Inspection}
 
@@ -653,17 +605,6 @@ The implementation of this capability is assumed to rest on the API aspect, and 
 Note that because the API aspect is shared between the Portal and Notebook, this capability can be used to retrieve in the Portal the results of queries recently executed in the Notebook aspect; this allows complex ADQL queries to be formulated programmatically in the Notebook while still permitting their results to be inspected in the Portal.
 Because of the reliance on the API aspect, the Portal is not required to provide this capability for external archives.
 
-\subsubsection{Query Results Size Limitation}
-
-\label{DMS-PRTL-REQ-0012}
-\textbf{ID:} DMS-PRTL-REQ-0012
-
-\textbf{Specification:}
-The Portal aspect shall have a mechanism to notify a user that a query result has exceeded threshold(s) for the maximum results size allowed and that the query has been terminated or disallowed.
-
-\textbf{Discussion:}
-Again, the underlying DAX support for this needs to be understood.
-
 \subsubsection{Query Saving - Portal}
 
 \label{DMS-PRTL-REQ-0014}
@@ -671,29 +612,6 @@ Again, the underlying DAX support for this needs to be understood.
 
 \textbf{Specification:}
 The Portal aspect shall provide a UI for the saving of a specification artifact for a user-performed query, either for downloading or for saving to the Workspace, and a UI for re-executing a saved query found in the Workspace or uploaded remotely.
-
-\subsubsection{Query Status and Termination Notification}
-
-\label{DMS-PRTL-REQ-0011}
-\textbf{ID:} DMS-PRTL-REQ-0011
-
-\textbf{Specification:}
-The Portal aspect shall notify the user of the status of the database query including if the query had been terminated for any reason.
-
-\textbf{Discussion:}
-There needs to be an operations discussion about when and why database queries are terminated, and what sorts of notifications will be generated by DAX in such cases.
-
-\subsubsection{Support Synchronous and Asynchronous Queries}
-
-\label{DMS-PRTL-REQ-0009}
-\textbf{ID:} DMS-PRTL-REQ-0009
-
-\textbf{Specification:}
-The Portal aspect shall provide UI models for both synchronous and asynchronous queries, based on user preference, loading, and resource capabilities.
-
-\textbf{Discussion:}
-This Portal capability should include an interface to initiate, monitor, and control the execution of both sync and async queries, as well as browse their results. Long running queries may be forced to be asynchronous.
-There is not a 1:1 relationship between this Portal capability and the analogous capability in the API aspect; for instance, the Portal may provide UI support for placing a long-running, technically synchronous (from the DAX perspective), query into the background from the user's perspective.
 
 \subsubsection{General Tabular Queries}
 
@@ -709,6 +627,18 @@ The Portal aspect shall enable the generation of queries against any tabular dat
 Provision of this relies on the Discovery and Reflection API requirement.  The idea is that some level of query will automatically be provided for every table even for tables for which no deliberately-designed custom search screens are available.
 Note that image metadata is tabular data, so a basic level of ability to query for lists of images is available through "generic queries", though more image-specific workflows will be provided.
 
+\paragraph{Generic Query - Form-based}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0016}
+\textbf{ID:} DMS-PRTL-REQ-0016
+
+\textbf{Specification:}
+The Portal aspect shall provide a search-builder form-based interface for generic table queries.  This facility may have reduced functionality for user tables for which the user has not provided full, or accurate, metadata.
+
+\textbf{Discussion:}
+The Discovery and Reflection API will be used to construct a form allowing query against any attribute of a table, taking the column metadata provided by the Reflection API into account to display units and other information that will help the user construct a meaningful query.
+We wish to allow and facilitate, but not require, users to provide detailed metadata for the tables they create; when they do, the system will take advantage of it.
+
 \paragraph{Generic Query - ADQL-based}\hfill  % Force subsequent text onto new line
 
 \label{DMS-PRTL-REQ-0017}
@@ -721,18 +651,6 @@ The Portal aspect shall provide a means for entering a query against any table d
 This is essentially a pass-through to the underlying API aspect TAP service.
 UI support for selecting from available identifiers (e.g. table or column names) for use in the ADQL, based on the Discovery and Reflection API, would be highly desirable.
 UI support for the specification of coordinate values for use in the ADQL, based on the Spatial Query Parameters requirements below, would also be desirable.
-
-\paragraph{Generic Query - Form-based}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0016}
-\textbf{ID:} DMS-PRTL-REQ-0016
-
-\textbf{Specification:}
-The Portal aspect shall provide a search-builder form-based interface for generic table queries.  This facility may have reduced functionality for user tables for which the user has not provided full, or accurate, metadata.
-
-\textbf{Discussion:}
-The Discovery and Reflection API will be used to construct a form allowing query against any attribute of a table, taking the column metadata provided by the Reflection API into account to display units and other information that will help the user construct a meaningful query.
-We wish to allow and facilitate, but not require, users to provide detailed metadata for the tables they create; when they do, the system will take advantage of it.
 
 \paragraph{Query Result Size}\hfill  % Force subsequent text onto new line
 
@@ -799,6 +717,30 @@ Much of this section covers both catalog and image metadata queries.  In general
 
 This section covers the means of specification of coordinates for spatial queries in the Portal UI.
 
+\textbf{\textit{Positional Query: Position on the Sky}}
+
+\label{DMS-PRTL-REQ-0020}
+\textbf{ID:} DMS-PRTL-REQ-0020
+
+\textbf{Specification:}
+The Portal aspect shall support queries based on an astrophysical position (i.e., coordinates) on the sky.
+
+\textbf{Discussion:}
+The intent of this requirement is to enable users to search for data at or near locations in equatorial, ecliptic or galactic coordinates and not a specific astrophysical object.
+The Portal is responsible for any conversion required to put the coordinate query parameters into the forms accepted by the underlying API aspect / DAX services.
+
+\textbf{\textit{Positional Query: Multiple Positions/Objects}}
+
+\label{DMS-PRTL-REQ-0021}
+\textbf{ID:} DMS-PRTL-REQ-0021
+
+\textbf{Specification:}
+The Portal aspect shall support list-based positional queries, with the coordinates used specified by any of the means of specifying positions required elsewhere herein.
+
+\textbf{Discussion:}
+Lists of positions may be uploaded or taken from the Workspace.  Efficient implementation of list-based queries requires a corresponding API aspect / DAX service, to avoid the submission of large numbers of separate queries.
+The system is not required to, but may, accept lists in which different elements are specified in more than one of the supported means of specifying positions; e.g., it is not required to support a list that is partially in equatorial coordinates and partially in LSST object IDs, because of the parsing and interpretation complexities involved.  The implementation should not preclude adding the ability to mix specification types later one, guided by feedback from the user community as to what is most useful.
+
 \textbf{\textit{Positional Query: Astrophysical Coordinate Systems}}
 
 \label{DMS-PRTL-REQ-0022}
@@ -832,30 +774,6 @@ The Portal aspect shall support the specification of coordinates for use within 
 \textbf{Discussion:}
 LSST object and source identifiers are not necessarily associated with previously known astrophysical sources.  The Portal will need to be able to interpret source and object names and return positions that can be used in positional-based searches.
 
-\textbf{\textit{Positional Query: Multiple Positions/Objects}}
-
-\label{DMS-PRTL-REQ-0021}
-\textbf{ID:} DMS-PRTL-REQ-0021
-
-\textbf{Specification:}
-The Portal aspect shall support list-based positional queries, with the coordinates used specified by any of the means of specifying positions required elsewhere herein.
-
-\textbf{Discussion:}
-Lists of positions may be uploaded or taken from the Workspace.  Efficient implementation of list-based queries requires a corresponding API aspect / DAX service, to avoid the submission of large numbers of separate queries.
-The system is not required to, but may, accept lists in which different elements are specified in more than one of the supported means of specifying positions; e.g., it is not required to support a list that is partially in equatorial coordinates and partially in LSST object IDs, because of the parsing and interpretation complexities involved.  The implementation should not preclude adding the ability to mix specification types later one, guided by feedback from the user community as to what is most useful.
-
-\textbf{\textit{Positional Query: Position on the Sky}}
-
-\label{DMS-PRTL-REQ-0020}
-\textbf{ID:} DMS-PRTL-REQ-0020
-
-\textbf{Specification:}
-The Portal aspect shall support queries based on an astrophysical position (i.e., coordinates) on the sky.
-
-\textbf{Discussion:}
-The intent of this requirement is to enable users to search for data at or near locations in equatorial, ecliptic or galactic coordinates and not a specific astrophysical object.
-The Portal is responsible for any conversion required to put the coordinate query parameters into the forms accepted by the underlying API aspect / DAX services.
-
 \textbf{\textit{Positional Query: Solar System Object Names}}
 
 \label{DMS-PRTL-REQ-0025}
@@ -870,14 +788,6 @@ This capability is expected to be available for tables that are both spatially a
 
 \textsc{Spatial Query Types}
 
-\textbf{\textit{Positional Query by Region: Box-Search}}
-
-\label{DMS-PRTL-REQ-0027}
-\textbf{ID:} DMS-PRTL-REQ-0027
-
-\textbf{Specification:}
-The Portal aspect shall support position-based queries based on a coordinate-system box search.
-
 \textbf{\textit{Positional Query by Region: Cone-Search}}
 
 \label{DMS-PRTL-REQ-0026}
@@ -885,6 +795,14 @@ The Portal aspect shall support position-based queries based on a coordinate-sys
 
 \textbf{Specification:}
 The Portal aspect shall support position-based queries based on a cone-shaped radial search.
+
+\textbf{\textit{Positional Query by Region: Box-Search}}
+
+\label{DMS-PRTL-REQ-0027}
+\textbf{ID:} DMS-PRTL-REQ-0027
+
+\textbf{Specification:}
+The Portal aspect shall support position-based queries based on a coordinate-system box search.
 
 \subparagraph{Temporal Queries}\hfill  % Force subsequent text onto new line
 
@@ -905,27 +823,16 @@ The Portal is responsible for conversion of user-supplied times to the appropria
 
 This section contains requirements on queries related to specific LSST catalogs.
 
-\paragraph{Access to Original Alert State}\hfill  % Force subsequent text onto new line
+\paragraph{Tabular Data Query Specifications}\hfill  % Force subsequent text onto new line
 
-\label{DMS-PRTL-REQ-0034}
-\textbf{ID:} DMS-PRTL-REQ-0034
-
-\textbf{Specification:}
-The Portal aspect shall provide access to the alerts as they were originally raised.
-
-\textbf{Discussion:}
-This is in the context of features elsewhere in the system that may allow for a chain of annotations of alerts.
-
-\paragraph{Queries on the Alerts Database}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0033}
-\textbf{ID:} DMS-PRTL-REQ-0033
+\label{DMS-PRTL-REQ-0031}
+\textbf{ID:} DMS-PRTL-REQ-0031
 
 \textbf{Specification:}
-The Portal aspect shall provide a query interface to the Alert Database, allowing searches based on parameters which shall include, but may not be limited to, Alert ID, time of alert, position on the sky, filter, and alert characteristics.
+The Portal aspect shall provide a user interface to execute queries of the (DIA)Object and (DIA)Source tables, driven by the data dictionary associated with the tables.
 
 \textbf{Discussion:}
-This capability, as all others in this section, is limited to data rights holders.  Non-data-rights holders have access to alerts only through the alerts stream(s) sent to public brokers.
+This should be satisfied almost completely by the "Generic Query - Form-Based" requirement above, but with some additional work on the UI to produce a more friendly workflow.
 
 \paragraph{Query Tabular Data based upon Image MetaData}\hfill  % Force subsequent text onto new line
 
@@ -938,50 +845,31 @@ The Portal aspect shall be able to support queries of catalog data that include 
 \textbf{Discussion:}
 This allows, for instance, limiting the return of Source catalog entries to measurements made on images taken with constraints on airmass, moon angle, etc.
 
-\paragraph{Tabular Data Query Specifications}\hfill  % Force subsequent text onto new line
+\paragraph{Queries on the Alerts Database}\hfill  % Force subsequent text onto new line
 
-\label{DMS-PRTL-REQ-0031}
-\textbf{ID:} DMS-PRTL-REQ-0031
+\label{DMS-PRTL-REQ-0033}
+\textbf{ID:} DMS-PRTL-REQ-0033
 
 \textbf{Specification:}
-The Portal aspect shall provide a user interface to execute queries of the (DIA)Object and (DIA)Source tables, driven by the data dictionary associated with the tables.
+The Portal aspect shall provide a query interface to the Alert Database, allowing searches based on parameters which shall include, but may not be limited to, Alert ID, time of alert, position on the sky, filter, and alert characteristics.
 
 \textbf{Discussion:}
-This should be satisfied almost completely by the "Generic Query - Form-Based" requirement above, but with some additional work on the UI to produce a more friendly workflow.
+This capability, as all others in this section, is limited to data rights holders.  Non-data-rights holders have access to alerts only through the alerts stream(s) sent to public brokers.
+
+\paragraph{Access to Original Alert State}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0034}
+\textbf{ID:} DMS-PRTL-REQ-0034
+
+\textbf{Specification:}
+The Portal aspect shall provide access to the alerts as they were originally raised.
+
+\textbf{Discussion:}
+This is in the context of features elsewhere in the system that may allow for a chain of annotations of alerts.
 
 \subsubsection{Image Metadata Queries}
 
 Image metadata is a special case of tabular data.  Some dedicated search capabilities are provided for it beyond the generic tabular searches.
-
-\paragraph{Coadded Image Query Specifications}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0039}
-\textbf{ID:} DMS-PRTL-REQ-0039
-
-\textbf{Specification:}
-The Portal aspect shall provide UI support for queries for coadded images based on the image metadata that describe the provenance of the images (e.g., filters, position on the sky, date, number of single-epoch images, coverage, survey depth).
-
-\paragraph{Query for Single Epoch CCD Image}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0037}
-\textbf{ID:} DMS-PRTL-REQ-0037
-
-\textbf{Specification:}
-The Portal aspect shall enable a user to limit the list of images selected by a single-epoch visit image query to those from a specified CCD.
-
-\textbf{Discussion:}
-The intent is to enable the return of every image from CCD X as a function of time or filter to enable viewing just that CCD.
-
-\paragraph{Query for Single Epoch Raft Images}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0036}
-\textbf{ID:} DMS-PRTL-REQ-0036
-
-\textbf{Specification:}
-The Portal aspect shall enable a user to limit the list of images selected by a single-epoch visit image query to those from a specified raft.
-
-\textbf{Discussion:}
-The intent is to enable the return of every image from RAFT X as a function of time or filter to enable viewing just that raft.
 
 \paragraph{Query for Single Epoch Visit Images}\hfill  % Force subsequent text onto new line
 
@@ -994,6 +882,28 @@ The Portal aspect shall enable a user to proceed from a visit-selection query or
 \textbf{Discussion:}
 The common image types will be raw, PVI (processed, i.e., calibrated, visit image), and difference image.
 
+\paragraph{Query for Single Epoch Raft Images}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0036}
+\textbf{ID:} DMS-PRTL-REQ-0036
+
+\textbf{Specification:}
+The Portal aspect shall enable a user to limit the list of images selected by a single-epoch visit image query to those from a specified raft.
+
+\textbf{Discussion:}
+The intent is to enable the return of every image from RAFT X as a function of time or filter to enable viewing just that raft.
+
+\paragraph{Query for Single Epoch CCD Image}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0037}
+\textbf{ID:} DMS-PRTL-REQ-0037
+
+\textbf{Specification:}
+The Portal aspect shall enable a user to limit the list of images selected by a single-epoch visit image query to those from a specified CCD.
+
+\textbf{Discussion:}
+The intent is to enable the return of every image from CCD X as a function of time or filter to enable viewing just that CCD.
+
 \paragraph{Single-Epoch Image Query Specifications}\hfill  % Force subsequent text onto new line
 
 \label{DMS-PRTL-REQ-0038}
@@ -1004,6 +914,14 @@ The Portal aspect shall provide UI support for queries for visits and their sing
 
 \textbf{Discussion:}
 The parameters specifically named are expected to be highlighted in the UI, rather than requiring the user to scroll through a long generic-table-query form to find the appropriate fields.  The UI will provide support for generating a join query including tables from the R-EFD, and for selecting the R-EFD tables and columns to use.
+
+\paragraph{Coadded Image Query Specifications}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0039}
+\textbf{ID:} DMS-PRTL-REQ-0039
+
+\textbf{Specification:}
+The Portal aspect shall provide UI support for queries for coadded images based on the image metadata that describe the provenance of the images (e.g., filters, position on the sky, date, number of single-epoch images, coverage, survey depth).
 
 \subsubsection{Image Cutout Queries}
 
@@ -1035,16 +953,17 @@ This is a front end to a cutout capability in the API aspect.
 
 The Display Data requirements are unique to the Portal.  The Notebook and API aspects of the LSP do not provide visualization services as such, though of course the Notebook permits the use of a wide variety of visualization libraries.
 
-\subsubsection{Linking Visualization of Image Data to Tabular Data}
+\subsubsection{Visualization of Tabular and Image Data}
 
-\label{DMS-PRTL-REQ-0044}
-\textbf{ID:} DMS-PRTL-REQ-0044
+\label{DMS-PRTL-REQ-0042}
+\textbf{ID:} DMS-PRTL-REQ-0042
 
 \textbf{Specification:}
-The Portal aspect shall provide the capability for the user to navigate between visualized tabular data and visualized image data.
+The Portal aspect shall provide the capability to visualize all tabular and image data products in the DPDD, as well as user data products.
 
 \textbf{Discussion:}
-For instance, there should be very simple UI support to display an image based on a row in an image metadata table, or to navigate from a selected source overplotted on an image to further information about that source.
+The products in the DPDD are the primary data products for use by the LSST users.  The "tabular and image" qualification indicates that the Portal is not required to provide a dedicated visualization for all data products that do not naturally fall into one of those categories.
+For user data products, the amount of detail and labeling, and the amount of UI support, will be less if they lack the full level of metadata that comes with the Project's own data products.
 
 \subsubsection{Visualization of Ancillary Information}
 
@@ -1059,17 +978,16 @@ The intent here is to call attention to the fact there is more than just the sur
 The specific ancillary data products to visualize will be determined during construction, based in part on feedback received during PDAC operation and the use of the Portal tools by developers.
 It is desirable that custom visualizations be available for important and frequently used ones such as Footprints (which can readily be displayed as pixel overlays).  Where dedicated Portal visualizations are not available, however, users should be able to use either LSST-provided or community libraries in the Notebook aspect to create custom visualizations.
 
-\subsubsection{Visualization of Tabular and Image Data}
+\subsubsection{Linking Visualization of Image Data to Tabular Data}
 
-\label{DMS-PRTL-REQ-0042}
-\textbf{ID:} DMS-PRTL-REQ-0042
+\label{DMS-PRTL-REQ-0044}
+\textbf{ID:} DMS-PRTL-REQ-0044
 
 \textbf{Specification:}
-The Portal aspect shall provide the capability to visualize all tabular and image data products in the DPDD, as well as user data products.
+The Portal aspect shall provide the capability for the user to navigate between visualized tabular data and visualized image data.
 
 \textbf{Discussion:}
-The products in the DPDD are the primary data products for use by the LSST users.  The "tabular and image" qualification indicates that the Portal is not required to provide a dedicated visualization for all data products that do not naturally fall into one of those categories.
-For user data products, the amount of detail and labeling, and the amount of UI support, will be less if they lack the full level of metadata that comes with the Project's own data products.
+For instance, there should be very simple UI support to display an image based on a row in an image metadata table, or to navigate from a selected source overplotted on an image to further information about that source.
 
 \subsubsection{Visualization of Uploaded Tabular and Image Data}
 
@@ -1097,18 +1015,6 @@ This should appear as a standard "select and open" workflow, with the Portal det
 
 \paragraph{Property Sheets}\hfill  % Force subsequent text onto new line
 
-\subparagraph{Alert Visualization}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0048}
-\textbf{ID:} DMS-PRTL-REQ-0048
-
-\textbf{Specification:}
-The Portal aspect shall provide for the users a "property sheet" for the contents of an alert packet including, but not necessarily limited to, the alert postage stamp image, the postage stamp time series, the photometric time series, the source and object information (e.g., position, brightness).
-
-\textbf{Discussion:}
-This display is based on a query performed on the alert database.  It may also be desirable to provide this functionality based on an actual published alert packet, e.g., by permitting the upload of such a packet for display.
-The alert property sheet should facilitate further exploration based on, e.g., the associated Object IDs in the alert.
-
 \subparagraph{Table Row Property Sheet}\hfill  % Force subsequent text onto new line
 
 \label{DMS-PRTL-REQ-0047}
@@ -1124,29 +1030,19 @@ Property sheets should, where enabled by metadata, appropriately exhibit relatio
 
 The system \textit{must} provide a generic property sheet functionality for any table for which full metadata is available. It \textit{may} also provide custom property sheets for commonly-queried tables such as Object, ForcedSource, Visit, etc. that provide a more scientifically useful layout, and additional available workflows, than possible just from the metadata.
 
+\subparagraph{Alert Visualization}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0048}
+\textbf{ID:} DMS-PRTL-REQ-0048
+
+\textbf{Specification:}
+The Portal aspect shall provide for the users a "property sheet" for the contents of an alert packet including, but not necessarily limited to, the alert postage stamp image, the postage stamp time series, the photometric time series, the source and object information (e.g., position, brightness).
+
+\textbf{Discussion:}
+This display is based on a query performed on the alert database.  It may also be desirable to provide this functionality based on an actual published alert packet, e.g., by permitting the upload of such a packet for display.
+The alert property sheet should facilitate further exploration based on, e.g., the associated Object IDs in the alert.
+
 \paragraph{Table Viewers}\hfill  % Force subsequent text onto new line
-
-\subparagraph{Column Selection of Tabular Data}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0050}
-\textbf{ID:} DMS-PRTL-REQ-0050
-
-\textbf{Specification:}
-The Portal aspect shall provide the capability to select, for display and downloading, specific columns within the tabular data viewer.
-
-\textbf{Discussion:}
-The intent of this requirement is to enable users to decide which columns are desired for display and download.
-
-\subparagraph{Copying of Tabular Data}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0052}
-\textbf{ID:} DMS-PRTL-REQ-0052
-
-\textbf{Specification:}
-The Portal aspect shall provide the capability of interactively selecting and copying data within a displayed data table.
-
-\textbf{Discussion:}
-The intent of this requirement is to enable users to use the mouse to select fields within a displayed table and utilize standard copy mechanisms.
 
 \subparagraph{Display of Tabular Data}\hfill  % Force subsequent text onto new line
 
@@ -1159,6 +1055,17 @@ The Portal aspect provide the capability to display tabular data in an interacti
 \textbf{Discussion:}
 The intent of this requirement is to capture that the database query returns are displayed.
 
+\subparagraph{Column Selection of Tabular Data}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0050}
+\textbf{ID:} DMS-PRTL-REQ-0050
+
+\textbf{Specification:}
+The Portal aspect shall provide the capability to select, for display and downloading, specific columns within the tabular data viewer.
+
+\textbf{Discussion:}
+The intent of this requirement is to enable users to decide which columns are desired for display and download.
+
 \subparagraph{Display Order of Columns of Tabular Data}\hfill  % Force subsequent text onto new line
 
 \label{DMS-PRTL-REQ-0051}
@@ -1170,16 +1077,16 @@ The Portal aspect shall provide the capability to change the display order of th
 \textbf{Discussion:}
 The intent of this requirement is to enable users to decide which order to view the columns.
 
-\subparagraph{Paging of Tabular Data}\hfill  % Force subsequent text onto new line
+\subparagraph{Copying of Tabular Data}\hfill  % Force subsequent text onto new line
 
-\label{DMS-PRTL-REQ-0054}
-\textbf{ID:} DMS-PRTL-REQ-0054
+\label{DMS-PRTL-REQ-0052}
+\textbf{ID:} DMS-PRTL-REQ-0052
 
 \textbf{Specification:}
-The Portal aspect shall provide the capability to display tabular data in a paged format.
+The Portal aspect shall provide the capability of interactively selecting and copying data within a displayed data table.
 
 \textbf{Discussion:}
-The intent of this requirement is to capture that the database query returns may be too large to display all at once to the user and a form of paging will be necessary.
+The intent of this requirement is to enable users to use the mouse to select fields within a displayed table and utilize standard copy mechanisms.
 
 \subparagraph{Row Selection of Tabular Data}\hfill  % Force subsequent text onto new line
 
@@ -1192,7 +1099,26 @@ The Portal aspect shall provide the capability to select, for display and downlo
 \textbf{Discussion:}
 The intent of this requirement is to enable users to decide which rows are desired for display and download and these may be different from the filtered rows (see filtering requirement below).
 
+\subparagraph{Paging of Tabular Data}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0054}
+\textbf{ID:} DMS-PRTL-REQ-0054
+
+\textbf{Specification:}
+The Portal aspect shall provide the capability to display tabular data in a paged format.
+
+\textbf{Discussion:}
+The intent of this requirement is to capture that the database query returns may be too large to display all at once to the user and a form of paging will be necessary.
+
 \paragraph{Tabular Data Graphing}\hfill  % Force subsequent text onto new line
+
+\subparagraph{XY Scatter Plots}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0055}
+\textbf{ID:} DMS-PRTL-REQ-0055
+
+\textbf{Specification:}
+The Portal aspect shall enable the creation and display of 2-dimensional xy-plots from tabular data.
 
 \subparagraph{Histograms}\hfill  % Force subsequent text onto new line
 
@@ -1205,27 +1131,16 @@ The Portal aspect shall enable the creation and display of 1-dimensional and 2-d
 \textbf{Discussion:}
 This requirement is about producing traditional histograms in 1 and 2 dimensions where the number of items within a bin are reported
 
-\subparagraph{Multiple XY-Plots on the Same Display}\hfill  % Force subsequent text onto new line
+\subparagraph{Symbol Size, Shape, and Color Coding in XY(Z) Scatter Plots}\hfill  % Force subsequent text onto new line
 
-\label{DMS-PRTL-REQ-0061}
-\textbf{ID:} DMS-PRTL-REQ-0061
-
-\textbf{Specification:}
-The Portal aspect shall be able to overlay multiple plots on the same display, differentiated by plotting colors, symbols, line styles, and shading.
-
-\textbf{Discussion:}
-The intent of this requirement is enable the plotting of multiple graphs on the same plotting canvas.  An example would be RA vs Time and Dec vs Time or u-band mag vs i-z color and r-band mag vs i-z color.
-
-\subparagraph{Plot Asymmetric Quantitative Uncertainties}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0059}
-\textbf{ID:} DMS-PRTL-REQ-0059
+\label{DMS-PRTL-REQ-0057}
+\textbf{ID:} DMS-PRTL-REQ-0057
 
 \textbf{Specification:}
-The Portal aspect shall be able represent uncertainties in the plotting of data that are unequal in value for the positive and negative directions.
+The Portal aspect shall enable the use of symbol size, shape, and color as indicators of additional tabular data associated with the XY(Z)-data plotted.
 
 \textbf{Discussion:}
-Uncertainties often have different limits in the positive and negative directions and as a result representation of the uncertainties will be different.
+This is a generalized requirement to enable the visualization of multi-dimensional data in a 2-d scatter plot environment.
 
 \subparagraph{Plot Quantitative Uncertainties}\hfill  % Force subsequent text onto new line
 
@@ -1237,6 +1152,17 @@ The Portal aspect shall be able represent uncertainties in the plotting of data.
 
 \textbf{Discussion:}
 This flows down from higher-level requirements above, and has implications for the creation of the necessary metadata to support this in the first place.
+
+\subparagraph{Plot Asymmetric Quantitative Uncertainties}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0059}
+\textbf{ID:} DMS-PRTL-REQ-0059
+
+\textbf{Specification:}
+The Portal aspect shall be able represent uncertainties in the plotting of data that are unequal in value for the positive and negative directions.
+
+\textbf{Discussion:}
+Uncertainties often have different limits in the positive and negative directions and as a result representation of the uncertainties will be different.
 
 \subparagraph{Plot Upper and Lower Quantitative Limits}\hfill  % Force subsequent text onto new line
 
@@ -1250,58 +1176,20 @@ The Portal aspect shall be able represent upper and lower limits in the plotting
 Often the values are non-detections and a limit is estimated on that value.  The limit can be an upper limit (e.g., flux) or a lower limit (e.g., magnitude).  Typically, the limit is represented by a flat line at the position of the value and an up or down arrow from that position.
 For tables with full metadata including UCDs this can be handled generically: the "stat.min" and "stat.max" UCDs can be used to trigger the display of the distinctive symbols.
 
-\subparagraph{Symbol Size, Shape, and Color Coding in XY(Z) Scatter Plots}\hfill  % Force subsequent text onto new line
+\subparagraph{Multiple XY-Plots on the Same Display}\hfill  % Force subsequent text onto new line
 
-\label{DMS-PRTL-REQ-0057}
-\textbf{ID:} DMS-PRTL-REQ-0057
+\label{DMS-PRTL-REQ-0061}
+\textbf{ID:} DMS-PRTL-REQ-0061
 
 \textbf{Specification:}
-The Portal aspect shall enable the use of symbol size, shape, and color as indicators of additional tabular data associated with the XY(Z)-data plotted.
+The Portal aspect shall be able to overlay multiple plots on the same display, differentiated by plotting colors, symbols, line styles, and shading.
 
 \textbf{Discussion:}
-This is a generalized requirement to enable the visualization of multi-dimensional data in a 2-d scatter plot environment.
-
-\subparagraph{XY Scatter Plots}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0055}
-\textbf{ID:} DMS-PRTL-REQ-0055
-
-\textbf{Specification:}
-The Portal aspect shall enable the creation and display of 2-dimensional xy-plots from tabular data.
+The intent of this requirement is enable the plotting of multiple graphs on the same plotting canvas.  An example would be RA vs Time and Dec vs Time or u-band mag vs i-z color and r-band mag vs i-z color.
 
 \subsubsection{Display Image Data}
 
 NB: These requirements are solely about \textit{displaying} images in the Portal, not querying for them. It is highly likely that they will all be satisfied with the same SUIT component; they are enumerated separately if for no other reason than to facilitate verification that the common data products of LSST can actually be displayed in useful ways.
-
-\paragraph{Display Calibration Image Data Products}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0067}
-\textbf{ID:} DMS-PRTL-REQ-0067
-
-\textbf{Specification:}
-The Portal aspect shall have the capability to display the calibration image data products such as synthetic flats, bias frames, and the like.
-
-\textbf{Discussion:}
-Note that these images may not have WCS information.
-
-\paragraph{Display Coadded Image Cutouts / Mosaics}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0066}
-\textbf{ID:} DMS-PRTL-REQ-0066
-
-\textbf{Specification:}
-The Portal aspect shall have the capability to display cutouts and mosaics from coadded image data products, as delivered from the API aspect.
-
-\textbf{Discussion:}
-Corresponds to the ability to request the generation of cutouts and mosaics.  These may cover areas both smaller than and larger than the native "patch" scale.
-
-\paragraph{Display Native Coadded Image Data Products}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0065}
-\textbf{ID:} DMS-PRTL-REQ-0065
-
-\textbf{Specification:}
-The Portal aspect shall have the capability to display the native coadded image data products, i.e., the patch-level images.
 
 \paragraph{Display Native Single-Visit Image Data Products}\hfill  % Force subsequent text onto new line
 
@@ -1337,6 +1225,36 @@ The Portal aspect shall have the capability to display a cutout from a single vi
 \textbf{Discussion:}
 Corresponds to the ability to request the generation of cutouts and cross-CCD mosaics.
 
+\paragraph{Display Native Coadded Image Data Products}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0065}
+\textbf{ID:} DMS-PRTL-REQ-0065
+
+\textbf{Specification:}
+The Portal aspect shall have the capability to display the native coadded image data products, i.e., the patch-level images.
+
+\paragraph{Display Coadded Image Cutouts / Mosaics}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0066}
+\textbf{ID:} DMS-PRTL-REQ-0066
+
+\textbf{Specification:}
+The Portal aspect shall have the capability to display cutouts and mosaics from coadded image data products, as delivered from the API aspect.
+
+\textbf{Discussion:}
+Corresponds to the ability to request the generation of cutouts and mosaics.  These may cover areas both smaller than and larger than the native "patch" scale.
+
+\paragraph{Display Calibration Image Data Products}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0067}
+\textbf{ID:} DMS-PRTL-REQ-0067
+
+\textbf{Specification:}
+The Portal aspect shall have the capability to display the calibration image data products such as synthetic flats, bias frames, and the like.
+
+\textbf{Discussion:}
+Note that these images may not have WCS information.
+
 \paragraph{Display User-provided Images}\hfill  % Force subsequent text onto new line
 
 \label{DMS-PRTL-REQ-0068}
@@ -1361,13 +1279,13 @@ This is information on the image artifact itself, e.g., on the contents of FITS 
 
 \paragraph{Image Display Tools}\hfill  % Force subsequent text onto new line
 
-\subparagraph{Image Appearance Manipulation}\hfill  % Force subsequent text onto new line
+\subparagraph{Provide Coordinate Display Tools for Images}\hfill  % Force subsequent text onto new line
 
-\label{DMS-PRTL-REQ-0074}
-\textbf{ID:} DMS-PRTL-REQ-0074
+\label{DMS-PRTL-REQ-0070}
+\textbf{ID:} DMS-PRTL-REQ-0070
 
 \textbf{Specification:}
-The Portal aspect shall enable the user to change the view of a displayed image including, but not necessarily limited to, the color table, the stretch function, and the displayed data range.
+The Portal shall provide all the capabilities in the Coordinate Display Tools section herein for image displays.  Specific capabilities will depend on the availability of WCS information for an image.
 
 \subparagraph{Image Pixel Content Display}\hfill  % Force subsequent text onto new line
 
@@ -1396,13 +1314,13 @@ The Portal aspect shall have the capability to display multiple images on a comm
 \textbf{Discussion:}
 The point behind this requirement is to enable viewing the same part of the sky in different filters aligned to same orientation and scaled to the same screen resolution for both single-frame and coadded images.
 
-\subparagraph{Provide Coordinate Display Tools for Images}\hfill  % Force subsequent text onto new line
+\subparagraph{Image Appearance Manipulation}\hfill  % Force subsequent text onto new line
 
-\label{DMS-PRTL-REQ-0070}
-\textbf{ID:} DMS-PRTL-REQ-0070
+\label{DMS-PRTL-REQ-0074}
+\textbf{ID:} DMS-PRTL-REQ-0074
 
 \textbf{Specification:}
-The Portal shall provide all the capabilities in the Coordinate Display Tools section herein for image displays.  Specific capabilities will depend on the availability of WCS information for an image.
+The Portal aspect shall enable the user to change the view of a displayed image including, but not necessarily limited to, the color table, the stretch function, and the displayed data range.
 
 \paragraph{Image Overlays}\hfill  % Force subsequent text onto new line
 
@@ -1419,17 +1337,6 @@ The Portal aspect shall enable the overlaying of additional pixel-oriented data 
 \textbf{Discussion:}
 This also enables, but does not require, the overplotting of two-dimensional density plots such as depth maps.
 
-\subparagraph{Image Overlays: Adjustment of Colors and Positions}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0077}
-\textbf{ID:} DMS-PRTL-REQ-0077
-
-\textbf{Specification:}
-The Portal aspect shall have the capability for a user to configure the annotations, colors, transparency, and positions (where applicable) of any image overlays, including those resulting from the use of the Coordinate Tools.
-
-\textbf{Discussion:}
-Often the default color and position of the overlay needs to be changed for clarification.
-
 \subparagraph{Image Plot Overlays}\hfill  % Force subsequent text onto new line
 
 \label{DMS-PRTL-REQ-0076}
@@ -1440,6 +1347,17 @@ The Portal aspect shall enable the overlaying of tabular data on an image, eithe
 
 \textbf{Discussion:}
 More generally, this should work for any two-dimensional plot data that shares a coordinate system with an image.  The catalog data need not be semantically linked with the image by anything other than the coordinate system used.
+
+\subparagraph{Image Overlays: Adjustment of Colors and Positions}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0077}
+\textbf{ID:} DMS-PRTL-REQ-0077
+
+\textbf{Specification:}
+The Portal aspect shall have the capability for a user to configure the annotations, colors, transparency, and positions (where applicable) of any image overlays, including those resulting from the use of the Coordinate Tools.
+
+\textbf{Discussion:}
+Often the default color and position of the overlay needs to be changed for clarification.
 
 \subsubsection{All-Sky Visualization}
 
@@ -1454,16 +1372,16 @@ The Portal aspect shall be able to display an all-sky image in the HEALPix forma
 \textbf{Discussion:}
 In addition to flux images such as all-sky coadds, the LSST pipelines and/or quality assessment processes may generate a variety of all-sky metrics, diagnostics, and other artifacts in this format.
 
-\paragraph{HEALPix Pixel Selection}\hfill  % Force subsequent text onto new line
+\paragraph{Zoom In and Out on a HEALPix Image}\hfill  % Force subsequent text onto new line
 
-\label{DMS-PRTL-REQ-0081}
-\textbf{ID:} DMS-PRTL-REQ-0081
+\label{DMS-PRTL-REQ-0079}
+\textbf{ID:} DMS-PRTL-REQ-0079
 
 \textbf{Specification:}
-The Portal aspect shall enable a user to select individual HEALPix pixels or groups of pixels and obtain references to them which can be used in other LSP aspects.
+The Portal aspect shall enable a user to zoom in and out on a HEALPix all-sky image.
 
 \textbf{Discussion:}
-UI selection of pixels, at selectable scales, can be done in the Portal, with the selections then used in other aspects.
+The zooming in and out will enable a user to change effective spatial resolution of the image on the screen, tranferring across levels of the image hierarchy.
 
 \paragraph{Pan Around on a HEALPix Image}\hfill  % Force subsequent text onto new line
 
@@ -1476,6 +1394,17 @@ The Portal aspect shall enable a user to move around within a HEALPix all-sky im
 \textbf{Discussion:}
 The panning is intended to enable a user to move around on the sky with a fixed zoom level.  Panning does not apply if the full all-sky image is visible on the screen.
 
+\paragraph{HEALPix Pixel Selection}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0081}
+\textbf{ID:} DMS-PRTL-REQ-0081
+
+\textbf{Specification:}
+The Portal aspect shall enable a user to select individual HEALPix pixels or groups of pixels and obtain references to them which can be used in other LSP aspects.
+
+\textbf{Discussion:}
+UI selection of pixels, at selectable scales, can be done in the Portal, with the selections then used in other aspects.
+
 \paragraph{Retrieve HEALPix-Associated Data}\hfill  % Force subsequent text onto new line
 
 \label{DMS-PRTL-REQ-0082}
@@ -1487,31 +1416,9 @@ The Portal aspect shall enable a user to retrieve metadata and data associated w
 \textbf{Discussion:}
 The HEALPix pixels will be associated with metadata (e.g., which objects are associated with that position on the sky) or data (e.g., what is the FWHM of all of the sources within that pixel on the sky).  That metadata/data will be retrievable via a selection of the HEALPix pixels.
 
-\paragraph{Zoom In and Out on a HEALPix Image}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0079}
-\textbf{ID:} DMS-PRTL-REQ-0079
-
-\textbf{Specification:}
-The Portal aspect shall enable a user to zoom in and out on a HEALPix all-sky image.
-
-\textbf{Discussion:}
-The zooming in and out will enable a user to change effective spatial resolution of the image on the screen, tranferring across levels of the image hierarchy.
-
 \subsubsection{Coordinate Display Tools}
 
 These tools are intended to be useful in any two-dimensional display of data in a well-defined spatial coordinate system: images as well as x-y plots where the axes are spatial.
-
-\paragraph{Astrophysical Compass Overlay}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0087}
-\textbf{ID:} DMS-PRTL-REQ-0087
-
-\textbf{Specification:}
-The Portal aspect shall have the capability to display a North-East Compass on an image or two-dimensional plot with a known astrophysical coordinate system.
-
-\textbf{Discussion:}
-So the user knows that the (particularly for the generally randomly rotated single-epoch data) which directions are North and East.
 
 \paragraph{Coordinate Display Applicability}\hfill  % Force subsequent text onto new line
 
@@ -1524,16 +1431,16 @@ The Portal aspect shall have the capability to provide the set of coordinate sys
 \textbf{Discussion:}
 The knowledge that coordinates in an x-y plot are spatial will in general depend on the availability of suitable metadata to define the coordinates.
 
-\paragraph{Coordinate Grid Overlays}\hfill  % Force subsequent text onto new line
+\paragraph{Point Coordinate Display}\hfill  % Force subsequent text onto new line
 
-\label{DMS-PRTL-REQ-0086}
-\textbf{ID:} DMS-PRTL-REQ-0086
+\label{DMS-PRTL-REQ-0084}
+\textbf{ID:} DMS-PRTL-REQ-0084
 
 \textbf{Specification:}
-The Portal aspect shall have the capability to display one or more coordinate grids on top of images or two-dimensional plots with a known astrophysical coordinate system.
+The Portal aspect shall have the capability to inspect the coordinates in a two-dimensional display that correspond to the position of the mouse cursor.  When coordinate system conversion information is available, display of all available coordinates shall be supported.  In particular, when available (e.g., for data associated with single-epoch and calibration images) the coordinate display shall include focal plane array electronic as well as  spatial coordinates.  When available (i.e., for an image, when a WCS is present) the coordinate display shall include astrophysical coordinates.
 
 \textbf{Discussion:}
-The point behind this requirement is to enable viewing of equatorial, galactic, and ecliptic coordinates overlays at the same time.
+When applied to images and at high zoom levels, the UI shall make clear whether pixel center coordinates or continuous cursor-location coordinates are being displayed.
 
 \paragraph{Distance Measurement Tool}\hfill  % Force subsequent text onto new line
 
@@ -1548,6 +1455,28 @@ The point behind this requirement is to enable distance determinations of equato
 When applied to general two-dimensional plots, distance measurement should only be supported when a metric and a geometry, or at least the relative scale between the two displayed coordinates, is known.
 This means that this capability is particularly dependent on metadata support.
 
+\paragraph{Coordinate Grid Overlays}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0086}
+\textbf{ID:} DMS-PRTL-REQ-0086
+
+\textbf{Specification:}
+The Portal aspect shall have the capability to display one or more coordinate grids on top of images or two-dimensional plots with a known astrophysical coordinate system.
+
+\textbf{Discussion:}
+The point behind this requirement is to enable viewing of equatorial, galactic, and ecliptic coordinates overlays at the same time.
+
+\paragraph{Astrophysical Compass Overlay}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0087}
+\textbf{ID:} DMS-PRTL-REQ-0087
+
+\textbf{Specification:}
+The Portal aspect shall have the capability to display a North-East Compass on an image or two-dimensional plot with a known astrophysical coordinate system.
+
+\textbf{Discussion:}
+So the user knows that the (particularly for the generally randomly rotated single-epoch data) which directions are North and East.
+
 \paragraph{Geometric Figure Overlays}\hfill  % Force subsequent text onto new line
 
 \label{DMS-PRTL-REQ-0088}
@@ -1559,77 +1488,11 @@ The Portal aspect shall enable the drawing, display, and selection of a closed 2
 \textbf{Discussion:}
 This is a general requirement that enables the overlay of a polygon on an image or a plot.  A polygon could be a circle, an ellipse, or an N-vertices polygon.  The purpose of this is enable area selection on the images or plots.
 
-\paragraph{Point Coordinate Display}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0084}
-\textbf{ID:} DMS-PRTL-REQ-0084
-
-\textbf{Specification:}
-The Portal aspect shall have the capability to inspect the coordinates in a two-dimensional display that correspond to the position of the mouse cursor.  When coordinate system conversion information is available, display of all available coordinates shall be supported.  In particular, when available (e.g., for data associated with single-epoch and calibration images) the coordinate display shall include focal plane array electronic as well as  spatial coordinates.  When available (i.e., for an image, when a WCS is present) the coordinate display shall include astrophysical coordinates.
-
-\textbf{Discussion:}
-When applied to images and at high zoom levels, the UI shall make clear whether pixel center coordinates or continuous cursor-location coordinates are being displayed.
-
 \subsection{Exploration and Analysis}
 
 Requirements in this section are unique to the Portal aspect.  The equivalent functionality in the Notebook aspect simply arises from its nature as an open programming environment.
 
 \subsubsection{Table Manipulation}
-
-\paragraph{Calculated Filtering of Tabular Data}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0091}
-\textbf{ID:} DMS-PRTL-REQ-0091
-
-\textbf{Specification:}
-The Portal aspect shall provide the capability to filter a table by single column where the filter has simple arithmetic calculations applied to the column values, including but not limited to sqrt, log, log10, exponentials and trigonometric functions.
-
-\textbf{Discussion:}
-The intent of this requirement is enable simple arithmetic functions on the values in the columns prior and then do the filtering on that value (e.g., X*0.33 < 10).
-
-\paragraph{Calculated Quantities on Tabular Data}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0093}
-\textbf{ID:} DMS-PRTL-REQ-0093
-
-\textbf{Specification:}
-The Portal aspect shall provide the capability to add an additional column to the displayed table based upon an arithmetic operations on columns within the displayed table and display the new column.
-
-\textbf{Discussion:}
-This intent of this requirement is enable the user to combine columns in the table to form a new column that can be included in the table and used in the same manner as the intrinsic columns.
-
-\paragraph{Filtering of Tabular Data by Multiple Columns}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0092}
-\textbf{ID:} DMS-PRTL-REQ-0092
-
-\textbf{Specification:}
-The Portal aspect shall provide the capability to filter tabular data by multiple columns within the table and redisplay the filtered table.
-
-\textbf{Discussion:}
-Apply filters from various columns.
-
-\paragraph{Saving Displayed Tabular Data}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0095}
-\textbf{ID:} DMS-PRTL-REQ-0095
-
-\textbf{Specification:}
-The Portal aspect shall provide the capability to save and or download tabular data as it is displayed in the interface maintaining the content, filtering, and sorting.
-
-\textbf{Discussion:}
-This intent of this requirement is enable the user to manipulate the table (e.g., sorting, filtering, calculated quantities and save that table to either workspace or in an offline download).
-
-\paragraph{Simple Filtering of Tabular Data}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0090}
-\textbf{ID:} DMS-PRTL-REQ-0090
-
-\textbf{Specification:}
-The Portal aspect shall provide the capability to filter tabular data by a single column, including but not limited to less than (<), less than or equal (<=), greater than (>), greater than or equal (=>), equal (=), not equal (!=) and not null (!=null).
-
-\textbf{Discussion:}
-The intent of this requirement is enable simple one-dimensional filtering on a single column or a series of columns and-ed together.
 
 \paragraph{Sorting of Tabular Data by Column}\hfill  % Force subsequent text onto new line
 
@@ -1642,6 +1505,50 @@ The Portal aspect shall provide the capability to sort tabular data by a single 
 \textbf{Discussion:}
 This is the traditional sorting by one column.
 
+\paragraph{Simple Filtering of Tabular Data}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0090}
+\textbf{ID:} DMS-PRTL-REQ-0090
+
+\textbf{Specification:}
+The Portal aspect shall provide the capability to filter tabular data by a single column, including but not limited to less than (<), less than or equal (<=), greater than (>), greater than or equal (=>), equal (=), not equal (!=) and not null (!=null).
+
+\textbf{Discussion:}
+The intent of this requirement is enable simple one-dimensional filtering on a single column or a series of columns and-ed together.
+
+\paragraph{Calculated Filtering of Tabular Data}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0091}
+\textbf{ID:} DMS-PRTL-REQ-0091
+
+\textbf{Specification:}
+The Portal aspect shall provide the capability to filter a table by single column where the filter has simple arithmetic calculations applied to the column values, including but not limited to sqrt, log, log10, exponentials and trigonometric functions.
+
+\textbf{Discussion:}
+The intent of this requirement is enable simple arithmetic functions on the values in the columns prior and then do the filtering on that value (e.g., X*0.33 < 10).
+
+\paragraph{Filtering of Tabular Data by Multiple Columns}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0092}
+\textbf{ID:} DMS-PRTL-REQ-0092
+
+\textbf{Specification:}
+The Portal aspect shall provide the capability to filter tabular data by multiple columns within the table and redisplay the filtered table.
+
+\textbf{Discussion:}
+Apply filters from various columns.
+
+\paragraph{Calculated Quantities on Tabular Data}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0093}
+\textbf{ID:} DMS-PRTL-REQ-0093
+
+\textbf{Specification:}
+The Portal aspect shall provide the capability to add an additional column to the displayed table based upon an arithmetic operations on columns within the displayed table and display the new column.
+
+\textbf{Discussion:}
+This intent of this requirement is enable the user to combine columns in the table to form a new column that can be included in the table and used in the same manner as the intrinsic columns.
+
 \paragraph{Statistical Measurements on Tabular Data}\hfill  % Force subsequent text onto new line
 
 \label{DMS-PRTL-REQ-0094}
@@ -1649,6 +1556,17 @@ This is the traditional sorting by one column.
 
 \textbf{Specification:}
 The Portal aspect shall enable the capability to perform a set of statistical measurements (e.g., mean, median, RMS, skew, kurtosis) on tabular data selected by the user.
+
+\paragraph{Saving Displayed Tabular Data}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0095}
+\textbf{ID:} DMS-PRTL-REQ-0095
+
+\textbf{Specification:}
+The Portal aspect shall provide the capability to save and or download tabular data as it is displayed in the interface maintaining the content, filtering, and sorting.
+
+\textbf{Discussion:}
+This intent of this requirement is enable the user to manipulate the table (e.g., sorting, filtering, calculated quantities and save that table to either workspace or in an offline download).
 
 \subsubsection{Image Manipulation}
 
@@ -1671,50 +1589,6 @@ The Portal aspect shall enable the capability to perform a set of statistical me
 \subsubsection{Special Workflows}
 
 The following requirements describe specific workflows or screens that combine various Portal capabilities to deliver scientifically useful functions.
-
-\paragraph{Brightness Light Curves}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0105}
-\textbf{ID:} DMS-PRTL-REQ-0105
-
-\textbf{Specification:}
-The Portal aspect shall have the capability to display graphically the brightness/magnitude of an LSST Object or Source or Forced Source as a function of time.
-
-\textbf{Discussion:}
-This is a specific implementation of the xy-plot capabilities
-
-\paragraph{Data Selection from a Plot or Image}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0107}
-\textbf{ID:} DMS-PRTL-REQ-0107
-
-\textbf{Specification:}
-The Portal aspect shall enable the selection of data contained inside or outside a closed 2-dimensional polygon on an xy-plot, 2-dimension data structure (e.g., density plot), and a 2-dimenstional image.
-
-\textbf{Discussion:}
-This is a general requirement that enables the selection of data from inside or outside a polygon.
-
-\paragraph{Display of Camera Artifacts as Overlays}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0102}
-\textbf{ID:} DMS-PRTL-REQ-0102
-
-\textbf{Specification:}
-The Portal aspect shall have the capability to display a camera artifacts including but not limited to image crosstalk matrices, ghost image identifications, saturation, and column bleeding.
-
-\textbf{Discussion:}
-The intent of this requirement is to enable the users to be able to see where artifacts may be affecting the data. These artifacts may not be stored in image format and may need to be reconstructed algorithmically.
-
-\paragraph{Linked Tables, Plots, and Images}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0106}
-\textbf{ID:} DMS-PRTL-REQ-0106
-
-\textbf{Specification:}
-The Portal aspect shall have the capability to have tabular data, plots, and images with overlays connected via brushing and linking.
-
-\textbf{Discussion:}
-Updates to the data in any one visualization tool (e.g., plot, image, table) creates an update in other visualization tools.  For example, selection of a set of photometry points in a color-color plot causes the corresponding rows in an Object table and symbols on an image to be highlighted; or, application of a selection predicate to a table causes the corresponding points in a plot to be highlighted.
 
 \paragraph{Overlay Catalog of Sources and Objects on Images}\hfill  % Force subsequent text onto new line
 
@@ -1751,27 +1625,16 @@ The Portal aspect shall be able to overlay user-provided source lists or catalog
 \textbf{Specification:}
 The Portal aspect shall be able to overlay user-provided region files (e.g., DS9 region files, focal plane outlines) on images.
 
-\paragraph{Position-based Time-Domain Image View}\hfill  % Force subsequent text onto new line
+\paragraph{Display of Camera Artifacts as Overlays}\hfill  % Force subsequent text onto new line
 
-\label{DMS-PRTL-REQ-0104}
-\textbf{ID:} DMS-PRTL-REQ-0104
-
-\textbf{Specification:}
-The Portal aspect shall have the capability to view an image time series that maintains the same physical scale, photometric scale, and image size display of a specified position on the sky.
-
-\textbf{Discussion:}
-If the object moves, then the images stay centered on the sky and the object appears to move.
-
-\paragraph{Saving Data Selection from a Plot or Image}\hfill  % Force subsequent text onto new line
-
-\label{DMS-PRTL-REQ-0108}
-\textbf{ID:} DMS-PRTL-REQ-0108
+\label{DMS-PRTL-REQ-0102}
+\textbf{ID:} DMS-PRTL-REQ-0102
 
 \textbf{Specification:}
-The Portal aspect shall enable the saving of data selected via a polygon selection across the linked images, tables, and plots.
+The Portal aspect shall have the capability to display a camera artifacts including but not limited to image crosstalk matrices, ghost image identifications, saturation, and column bleeding.
 
 \textbf{Discussion:}
-An example here is to have an image up; draw a polygon on the image to select the area on the sky.  All the tabular data associated with sources and objects in that part of the sky would be selected and saved.
+The intent of this requirement is to enable the users to be able to see where artifacts may be affecting the data. These artifacts may not be stored in image format and may need to be reconstructed algorithmically.
 
 \paragraph{Single-Object Time-Domain Image View}\hfill  % Force subsequent text onto new line
 
@@ -1784,9 +1647,64 @@ The Portal aspect shall have the capability to view an image time series that ma
 \textbf{Discussion:}
 If the object moves, then the images stay centered on the object.
 
+\paragraph{Position-based Time-Domain Image View}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0104}
+\textbf{ID:} DMS-PRTL-REQ-0104
+
+\textbf{Specification:}
+The Portal aspect shall have the capability to view an image time series that maintains the same physical scale, photometric scale, and image size display of a specified position on the sky.
+
+\textbf{Discussion:}
+If the object moves, then the images stay centered on the sky and the object appears to move.
+
+\paragraph{Brightness Light Curves}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0105}
+\textbf{ID:} DMS-PRTL-REQ-0105
+
+\textbf{Specification:}
+The Portal aspect shall have the capability to display graphically the brightness/magnitude of an LSST Object or Source or Forced Source as a function of time.
+
+\textbf{Discussion:}
+This is a specific implementation of the xy-plot capabilities
+
+\paragraph{Linked Tables, Plots, and Images}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0106}
+\textbf{ID:} DMS-PRTL-REQ-0106
+
+\textbf{Specification:}
+The Portal aspect shall have the capability to have tabular data, plots, and images with overlays connected via brushing and linking.
+
+\textbf{Discussion:}
+Updates to the data in any one visualization tool (e.g., plot, image, table) creates an update in other visualization tools.  For example, selection of a set of photometry points in a color-color plot causes the corresponding rows in an Object table and symbols on an image to be highlighted; or, application of a selection predicate to a table causes the corresponding points in a plot to be highlighted.
+
+\paragraph{Data Selection from a Plot or Image}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0107}
+\textbf{ID:} DMS-PRTL-REQ-0107
+
+\textbf{Specification:}
+The Portal aspect shall enable the selection of data contained inside or outside a closed 2-dimensional polygon on an xy-plot, 2-dimension data structure (e.g., density plot), and a 2-dimenstional image.
+
+\textbf{Discussion:}
+This is a general requirement that enables the selection of data from inside or outside a polygon.
+
+\paragraph{Saving Data Selection from a Plot or Image}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-0108}
+\textbf{ID:} DMS-PRTL-REQ-0108
+
+\textbf{Specification:}
+The Portal aspect shall enable the saving of data selected via a polygon selection across the linked images, tables, and plots.
+
+\textbf{Discussion:}
+An example here is to have an image up; draw a polygon on the image to select the area on the sky.  All the tabular data associated with sources and objects in that part of the sky would be selected and saved.
+
 \subsection{User Storage}
 
-\subsubsection{Access to User Databases (Level 3 Data Products)}
+\subsubsection{Access to User Databases}
 
 \label{DMS-PRTL-REQ-0109}
 \textbf{ID:} DMS-PRTL-REQ-0109
@@ -1796,16 +1714,16 @@ The Portal aspect shall provide read/write access to user databases (Level 3 tab
 
 \subsection{Transfer Data}
 
-\subsubsection{Download Volume Estimation}
+\subsubsection{Tabular Data Download}
 
-\label{DMS-PRTL-REQ-0113}
-\textbf{ID:} DMS-PRTL-REQ-0113
+\label{DMS-PRTL-REQ-0110}
+\textbf{ID:} DMS-PRTL-REQ-0110
 
 \textbf{Specification:}
-The Portal aspect shall provide an estimate of the data download volume prior to a user confirming the download option.
+The Portal aspect shall include a mechanism for a user to download to a remote site, Workspace, or to an existing or new user database the tabular results from a database query, including for catalog or image metadata.
 
 \textbf{Discussion:}
-The intent of this requirement is to enable the users to understand how large a query result or data set may be prior to the full retrieval and downloading of that data to either the workspace environment or their own local environment.
+This may be implemented as a pass-through to the API aspect when applied to the results of a query against an LSST database.
 
 \subsubsection{Image Data Download}
 
@@ -1818,6 +1736,25 @@ The Portal aspect shall include mechanisms for a user to download image data to 
 \textbf{Discussion:}
 Again, this should be implemented as a pass-through to the API aspect.
 
+\subsubsection{Selected Image Download}
+
+\label{DMS-PRTL-REQ-0112}
+\textbf{ID:} DMS-PRTL-REQ-0112
+
+\textbf{Specification:}
+The Portal aspect shall support user selection for download of a subset of the images in an image metadata table or image cutout table.
+
+\subsubsection{Download Volume Estimation}
+
+\label{DMS-PRTL-REQ-0113}
+\textbf{ID:} DMS-PRTL-REQ-0113
+
+\textbf{Specification:}
+The Portal aspect shall provide an estimate of the data download volume prior to a user confirming the download option.
+
+\textbf{Discussion:}
+The intent of this requirement is to enable the users to understand how large a query result or data set may be prior to the full retrieval and downloading of that data to either the workspace environment or their own local environment.
+
 \subsubsection{Long Download Completion Notification}
 
 \label{DMS-PRTL-REQ-0114}
@@ -1829,24 +1766,9 @@ The Portal aspect shall notify the user with an estimate of how long a download 
 \textbf{Discussion:}
 DAX requirement for async
 
-\subsubsection{Selected Image Download}
+\subsection{Performance}
 
-\label{DMS-PRTL-REQ-0112}
-\textbf{ID:} DMS-PRTL-REQ-0112
-
-\textbf{Specification:}
-The Portal aspect shall support user selection for download of a subset of the images in an image metadata table or image cutout table.
-
-\subsubsection{Tabular Data Download}
-
-\label{DMS-PRTL-REQ-0110}
-\textbf{ID:} DMS-PRTL-REQ-0110
-
-\textbf{Specification:}
-The Portal aspect shall include a mechanism for a user to download to a remote site, Workspace, or to an existing or new user database the tabular results from a database query, including for catalog or image metadata.
-
-\textbf{Discussion:}
-This may be implemented as a pass-through to the API aspect when applied to the results of a query against an LSST database.
+Substantially more work needs to be done on codifying performance requirement for the components of the LSP.
 
 \subsection{Control and Management}
 
@@ -1861,6 +1783,17 @@ The Portal aspect shall provide a documented application program interface that 
 \textbf{Discussion:}
 This is intended to be enable API control of the visualization components and tool-level visualization services to be called and controlled through an API.
 There will be a Web API as well as a Python wrapper for it.
+
+\subsubsection{Storage Quotas User Interface}
+
+\label{DMS-PRTL-REQ-0116}
+\textbf{ID:} DMS-PRTL-REQ-0116
+
+\textbf{Specification:}
+The Portal aspect shall provide the user with an understanding of the current status of their storage allocations
+
+\textbf{Discussion:}
+This requirement is about the SUIT implementing the quotas defined by the DM system.  Those requirements need to defined and work through by the Project and the DM.
 
 \subsubsection{Computational Quotas User Interface}
 
@@ -1883,17 +1816,6 @@ The Portal aspect shall enable a user to establish and save viewing preferences,
 
 \textbf{Discussion:}
 The intent behind this requirement is to enable user to set up a working environment within the default portal or the workspace environment and be able to save the state of the workflow.
-
-\subsubsection{Storage Quotas User Interface}
-
-\label{DMS-PRTL-REQ-0116}
-\textbf{ID:} DMS-PRTL-REQ-0116
-
-\textbf{Specification:}
-The Portal aspect shall provide the user with an understanding of the current status of their storage allocations
-
-\textbf{Discussion:}
-This requirement is about the SUIT implementing the quotas defined by the DM system.  Those requirements need to defined and work through by the Project and the DM.
 
 \subsubsection{Alert Subscription}
 
@@ -1940,6 +1862,14 @@ The Portal aspect shall provide access to Project-provided documentation on the 
 \textbf{Discussion:}
 Much of this will be just a link or links to documentation whose creation is out of the scope of DM.  The DM documentation will include documentation on the code, on the pipeline processing, and on the delivered data quality.  Note that documentation on the Science Platform itself will also be included.
 
+\subsubsection{Portal User Documentation}
+
+\label{DMS-PRTL-REQ-0123}
+\textbf{ID:} DMS-PRTL-REQ-0123
+
+\textbf{Specification:}
+The Portal aspect shall provide user-guide-style documentation on the use of the Portal.
+
 \subsubsection{Portal API Documentation}
 
 \label{DMS-PRTL-REQ-0124}
@@ -1952,52 +1882,35 @@ The Portal aspect shall provide reference-manual-style documentation on its publ
 This may include network APIs that allow interaction with a Portal session's state, Python APIs including wrappers for the network APIs, and JavaScript APIs for the components of the Portal application.
 This requirement is somewhat redundant with the general DM requirement that all code be supplied with reference documentation, but emphasizes a coherent presentation of the APIs relevant to the Portal.
 
-\subsubsection{Portal User Documentation}
+\subsection{General}
 
-\label{DMS-PRTL-REQ-0123}
-\textbf{ID:} DMS-PRTL-REQ-0123
+\subsubsection{Identity and Security}
 
-\textbf{Specification:}
-The Portal aspect shall provide user-guide-style documentation on the use of the Portal.
+\subsubsection{Implementation}
 
-\section{Notebooks}
+\paragraph{Tolerance of Production Database Changes}\hfill  % Force subsequent text onto new line
 
-\subsection{Connection}
-
-\subsubsection{Secure Protocol}
-
-\label{DMS-NB-REQ-0001}
-\textbf{ID:} DMS-NB-REQ-0001
+\label{DMS-PRTL-REQ-0125}
+\textbf{ID:} DMS-PRTL-REQ-0125
 
 \textbf{Specification:}
-The Notebook Aspect shall be accessible through an HTTPS endpoint.
-
-\subsubsection{Authentication and Authorization}
-
-\label{DMS-NB-REQ-0002}
-\textbf{ID:} DMS-NB-REQ-0002
-
-\textbf{Specification:}
-The Notebook Aspect shall authenticate users for the purpose of establishing authorized use and only permit access to authenticated users using the LSST Data Facility authentication and authorisation service.
-
-\subsubsection{Secure Implementation}
-
-\label{DMS-NB-REQ-0003}
-\textbf{ID:} DMS-NB-REQ-0003
-
-\textbf{Specification:}
-The Notebook Aspect shall prevent users from circumventing authorisation controls.
+The Portal aspect shall be designed to facilitate accommodation of database expansion and changes and metadata extension and changes associated with the evolution of the Level 1 data, Level 2 data releases, and other planned data sources.
 
 \textbf{Discussion:}
-The Notebook Aspect relies on other services, such as authentication, file system permissions etc to prevent access to unauthorized data. It should not be possible for a user to spoof another user in a way that permits access to unauthorized data
+The LSP needs to accommodate the database changes associated with Level 1 and Level 2 updates; this also has implications for DAX - see the "Discovery and Reflection APIs" requirement - and for the availability of the data as they are released with the processing (nightly and annually).  This requires stability for the APIs (web and client), and usability of the Portal across releases (and for multiple releases).
 
-\subsubsection{IPV6 Access}
+\paragraph{System-Busy Indication}\hfill  % Force subsequent text onto new line
 
-\label{DMS-NB-REQ-0004}
-\textbf{ID:} DMS-NB-REQ-0004
+\label{DMS-PRTL-REQ-0126}
+\textbf{ID:} DMS-PRTL-REQ-0126
 
 \textbf{Specification:}
-Access to the Notebook Aspect shall support access using IPv6 protocols.
+The Portal aspect shall provide a means to inform users when elements of the system are unavailable.
+
+\textbf{Discussion:}
+This might be due to maintenance or to excessive load.
+
+\section{Notebook Aspect}
 
 \subsection{Environment}
 
@@ -2243,42 +2156,7 @@ The Notebook Aspect, when deployed in an LSST Data Access Center, shall be sized
 \textbf{Discussion:}
 This requirement does not apply to all instances, as it is dependent on resource allocations.
 
-\subsection{Interaction with Portal}
-
-\subsubsection{Access to Portal-Initiated Queries}
-
-\label{DMS-NB-REQ-0029}
-\textbf{ID:} DMS-NB-REQ-0029
-
-\textbf{Specification:}
-A user of the Notebook Aspect shall have access to search queries they performed in the Portal Aspect.
-
-\textbf{Discussion:}
-This depends on underlying services from the API Aspect.
-
-\subsubsection{Access to Portal Visualization API}
-
-\label{DMS-NB-REQ-0030}
-\textbf{ID:} DMS-NB-REQ-0030
-
-\textbf{Specification:}
-The Notebook Aspect shall provide a mechanism for "pushing" specific types of data to the Portal API.
-
-\textbf{Discussion:}
-For instance, this allows a user to plot a catalog of coordinates over an image display using the Portal's Firefly components.  This is supported by \hyperref[DMS-PRTL-REQ-0115]{DMS-PRTL-REQ-0115} on the Portal side.
-
-\subsubsection{Notebook-Launching Interface}
-
-\label{DMS-NB-REQ-0031}
-\textbf{ID:} DMS-NB-REQ-0031
-
-\textbf{Specification:}
-The Notebook Aspect shall provide a means to trigger the opening of a notebook with access to the results of a query performed in the Portal.
-
-\textbf{Discussion:}
-This is intended to permit a Portal user to perform a query and then quickly obtain a Notebook session with that data available for further analysis.  The UI element for this might be in either the Portal or Notebook system Uis, depending on implementation issues.
-
-\subsection{Visualization and Widgets}
+\subsection{Display Data}
 
 \subsubsection{Image Visualization}
 
@@ -2337,206 +2215,85 @@ The Notebook Aspect shall provide interactive plots that scale to include at lea
 \textbf{Discussion:}
 This may be done through an adaptive refinement scheme like datashader.
 
-\section{Data Access Interface}
+\subsection{Interaction with Portal}
 
-\subsection{Connection}
+\subsubsection{Access to Portal-Initiated Queries}
 
-The following requirements provide overall constraints on the network APIs exposed from the API Aspect to the public Internet.
-
-\subsubsection{Secure Protocols}
-
-\label{DMS-API-REQ-0001}
-\textbf{ID:} DMS-API-REQ-0001
+\label{DMS-NB-REQ-0029}
+\textbf{ID:} DMS-NB-REQ-0029
 
 \textbf{Specification:}
-The API Aspect Web APIs shall be accessible through HTTPS endpoints.
-
-\subsubsection{Result Compression}
-
-\label{DMS-API-REQ-0002}
-\textbf{ID:} DMS-API-REQ-0002
-
-\textbf{Specification:}
-The API Aspect Web APIs shall support gzip HTTP content-encoding for the purpose of returning compressed data.
-
-\subsubsection{Authentication}
-
-\label{DMS-API-REQ-0003}
-\textbf{ID:} DMS-API-REQ-0003
-
-\textbf{Specification:}
-The API Aspect Web APIs shall accept authenticated requests for the purpose of establishing user identity.
-
-\subsubsection{Authorization}
-
-\label{DMS-API-REQ-0004}
-\textbf{ID:} DMS-API-REQ-0004
-
-\textbf{Specification:}
-The API Aspect Web APIs shall interact with project authorization infrastructure for the purpose of establishing authorized use.
-
-\subsubsection{Secure Implementation}
-
-\label{DMS-API-REQ-0005}
-\textbf{ID:} DMS-API-REQ-0005
-
-\textbf{Specification:}
-The API Aspect Web APIs shall prevent users from circumventing authorization controls.
-
-\subsection{TAP Service - Tabular Queries}
-
-The API Aspect includes a TAP service as the primary means of access to tabular data.
-
-\subsubsection{TAP Service for Tabular Queries}
-
-\label{DMS-API-REQ-0006}
-\textbf{ID:} DMS-API-REQ-0006
-
-\textbf{Specification:}
-The API Aspect Web APIs shall include an endpoint conforming to IVOA TAP 1.1 for the purpose of accessing tabularly structured data.
-
-\subsubsection{Synchronous TAP Support}
-
-\label{DMS-API-REQ-0007}
-\textbf{ID:} DMS-API-REQ-0007
-
-\textbf{Specification:}
-The API Aspect TAP endpoint shall support synchronous queries as described by the IVOA TAP 1.1 specification.
+A user of the Notebook Aspect shall have access to search queries they performed in the Portal Aspect.
 
 \textbf{Discussion:}
-Synchronous queries are primarily expected to be used for small results.  It is TBD whether this mode will be suitable for use with shared-scan queries.
+This depends on underlying services from the API Aspect.
 
-\subsubsection{Asynchronous TAP Support}
+\subsubsection{Access to Portal Visualization API}
 
-\label{DMS-API-REQ-0008}
-\textbf{ID:} DMS-API-REQ-0008
-
-\textbf{Specification:}
-The API Aspect TAP endpoint shall support both synchronous and asynchronous queries as described by the IVOA TAP 1.1 specification.
-
-\subsubsection{ADQL Support}
-
-\label{DMS-API-REQ-0009}
-\textbf{ID:} DMS-API-REQ-0009
+\label{DMS-NB-REQ-0030}
+\textbf{ID:} DMS-NB-REQ-0030
 
 \textbf{Specification:}
-The API Aspect TAP endpoint shall support IVOA ADQL 2.1 as a query language, \textbf{BUT} supported query syntax for database targets \textbf{MAY} be limited by practical considerations of individual underlying database technologies
-
-\subsection{Tabular Data Output}
-
-Requirements in this section apply to the return of tabular data from API Aspect services.
-
-\subsubsection{VOTable Output for TAP}
-
-\label{DMS-API-REQ-0010}
-\textbf{ID:} DMS-API-REQ-0010
-
-\textbf{Specification:}
-The API Aspect TAP endpoint shall support IVOA VOTable 1.3 as an available output format
-
-\subsubsection{VOTable TABLEDATA Payload}
-
-\label{DMS-API-REQ-0011}
-\textbf{ID:} DMS-API-REQ-0011
-
-\textbf{Specification:}
-API Aspect services that support returning results in VOTable format shall support the return of a VOTable data payload in the XML-based TABLEDATA serialization.
+The Notebook Aspect shall provide a mechanism for "pushing" specific types of data to the Portal API.
 
 \textbf{Discussion:}
-This payload form is not intended for large tables, but is provided for compatibility with community tools.  The API Aspect TAP service may place an upper bound on the size of a table that can be returned in this format.
+For instance, this allows a user to plot a catalog of coordinates over an image display using the Portal's Firefly components.  This is supported by \hyperref[DMS-PRTL-REQ-0115]{DMS-PRTL-REQ-0115} on the Portal side.
 
-\subsubsection{VOTable BINARY2 Payload}
+\subsubsection{Notebook-Launching Interface}
 
-\label{DMS-API-REQ-0012}
-\textbf{ID:} DMS-API-REQ-0012
+\label{DMS-NB-REQ-0031}
+\textbf{ID:} DMS-NB-REQ-0031
 
 \textbf{Specification:}
-API Aspect services that support returning results in VOTable format shall support the return of a VOTable data payload in the BINARY2 serialization.
+The Notebook Aspect shall provide a means to trigger the opening of a notebook with access to the results of a query performed in the Portal.
 
 \textbf{Discussion:}
-This payload form supports larger tabular results but is most likely still not optimal for the largest queries.  The API Aspect team is still investigating additional options, including the use of the FITS serialization, as well as the use of non-VOTable formats, for efficient and metadata-rich tabular results.
+This is intended to permit a Portal user to perform a query and then quickly obtain a Notebook session with that data available for further analysis.  The UI element for this might be in either the Portal or Notebook system Uis, depending on implementation issues.
 
-\subsubsection{JSON Output for TAP}
+\subsection{General}
 
-\label{DMS-API-REQ-0013}
-\textbf{ID:} DMS-API-REQ-0013
+\subsubsection{Identity and Security}
 
-\textbf{Specification:}
-The API Aspect TAP endpoint shall support JSON as an alternative available output format
+\paragraph{Secure Protocol}\hfill  % Force subsequent text onto new line
 
-\subsubsection{CSV Output for TAP}
-
-\label{DMS-API-REQ-0014}
-\textbf{ID:} DMS-API-REQ-0014
+\label{DMS-NB-REQ-0001}
+\textbf{ID:} DMS-NB-REQ-0001
 
 \textbf{Specification:}
-The API Aspect TAP endpoint shall support CSV as and alternative available output format.  This output format is not required to meet requirements otherwise in force on the return of table and column metadata.
+The Notebook Aspect shall be accessible through an HTTPS endpoint.
+
+\paragraph{Authentication and Authorization}\hfill  % Force subsequent text onto new line
+
+\label{DMS-NB-REQ-0002}
+\textbf{ID:} DMS-NB-REQ-0002
+
+\textbf{Specification:}
+The Notebook Aspect shall authenticate users for the purpose of establishing authorized use and only permit access to authenticated users using the LSST Data Facility authentication and authorisation service.
+
+\paragraph{Secure Implementation}\hfill  % Force subsequent text onto new line
+
+\label{DMS-NB-REQ-0003}
+\textbf{ID:} DMS-NB-REQ-0003
+
+\textbf{Specification:}
+The Notebook Aspect shall prevent users from circumventing authorisation controls.
 
 \textbf{Discussion:}
-The CSV format inherently is unsuitable for returning rich metadata with a table.
+The Notebook Aspect relies on other services, such as authentication, file system permissions etc to prevent access to unauthorized data. It should not be possible for a user to spoof another user in a way that permits access to unauthorized data
 
-\subsubsection{SQLite Output for TAP}
+\subsubsection{Implementation}
 
-\label{DMS-API-REQ-0015}
-\textbf{ID:} DMS-API-REQ-0015
+\paragraph{IPV6 Access}\hfill  % Force subsequent text onto new line
 
-\textbf{Specification:}
-The API Aspect TAP endpoint SHOULD support SQLite as an alternative available output format
-
-\textbf{Discussion:}
-The mandatory status of this requirement should be settled one way or the other as soon as possible.  It is a candidate for a efficient and readily consumed format for large results with rich metadata.
-
-\subsection{SIA Service - Image Availability}
-
-\subsubsection{SIA Service for Image Availability}
-
-\label{DMS-API-REQ-0016}
-\textbf{ID:} DMS-API-REQ-0016
+\label{DMS-NB-REQ-0004}
+\textbf{ID:} DMS-NB-REQ-0004
 
 \textbf{Specification:}
-The API Aspect Web APIs shall include an endpoint conforming to IVOA SIA V2 for the purpose of locating available images
+Access to the Notebook Aspect shall support access using IPv6 protocols.
 
-\subsection{SODA Service - Image Data Retrieval}
+\section{API (Data Access) Aspect}
 
-The retrieval of actual image pixel data is provided by an IVOA SODA service.  This service provides both for the retrieval of as-archived images and for the retrieval of post-processed image data such as cutouts.
-
-It is expected that some form of mosaicing service will be provided, but a specfic requirement is still to be written.
-
-\subsubsection{SODA Service for Image Data}
-
-\label{DMS-API-REQ-0017}
-\textbf{ID:} DMS-API-REQ-0017
-
-\textbf{Specification:}
-The API Aspect Web APIs shall include an endpoint conforming to IVOA SODA 1.0 for the purpose of retrieving image data.
-
-\subsubsection{Cutout Service}
-
-\label{DMS-API-REQ-0018}
-\textbf{ID:} DMS-API-REQ-0018
-
-\textbf{Specification:}
-The API Aspect SODA enpoint shall support performing cutouts on all released image data types, \textbf{BUT} supported filter predicates \textbf{MAY} exclude POLYGON
-
-\subsection{User File Workspace}
-
-\subsubsection{Service}
-
-\label{DMS-API-REQ-0019}
-\textbf{ID:} DMS-API-REQ-0019
-
-\textbf{Specification:}
-The API Aspect Web APIs shall include an endpoint conforming to IVOA VOSpace 2.0 for the purpose of persistence and retrieval of user-generated file-oriented data products in the User Workspace defined in \hyperref[DMS-LSP-REQ-0011]{DMS-LSP-REQ-0011}.
-
-\subsubsection{WebDAV Service}
-
-\label{DMS-API-REQ-0020}
-\textbf{ID:} DMS-API-REQ-0020
-
-\textbf{Specification:}
-The API Aspect Web APIs shall include an endpoint conforming to WebDAV for the purpose of persistence and retrieval of user-generated file-oriented data products in the User Workspace defined in \hyperref[DMS-LSP-REQ-0011]{DMS-LSP-REQ-0011}.
-
-\subsection{Data Products}
+\subsection{Discover Data}
 
 \subsubsection{Use of CAOM2}
 
@@ -2627,84 +2384,87 @@ The requirement is explicitly silent on the question of whether data from multip
 \textbf{Specification:}
 The API Aspect shall provide complete metadata for all tables within each data release, including per-column a description, IVOA UCD when appropriate, unit when appropriate, and any relationship with other columns
 
-\subsection{User Data Products}
+\subsection{Query Data}
 
-\subsubsection{Tabular Result Download to Workspace}
+\subsubsection{TAP Service - Tabular Queries}
 
-\label{DMS-API-REQ-0031}
-\textbf{ID:} DMS-API-REQ-0031
+The API Aspect includes a TAP service as the primary means of access to tabular data.
+
+\paragraph{TAP Service for Tabular Queries}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-0006}
+\textbf{ID:} DMS-API-REQ-0006
 
 \textbf{Specification:}
-The API Aspect shall provide a capability for users to save their query results as VOTables in their allocated VOSpace, subject to limitations of a resource quota system
+The API Aspect Web APIs shall include an endpoint conforming to IVOA TAP 1.1 for the purpose of accessing tabularly structured data.
+
+\paragraph{Synchronous TAP Support}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-0007}
+\textbf{ID:} DMS-API-REQ-0007
+
+\textbf{Specification:}
+The API Aspect TAP endpoint shall support synchronous queries as described by the IVOA TAP 1.1 specification.
 
 \textbf{Discussion:}
-Or any of the other supported formats?
+Synchronous queries are primarily expected to be used for small results.  It is TBD whether this mode will be suitable for use with shared-scan queries.
 
-\subsubsection{Tabular Upload to Workspace}
+\paragraph{Asynchronous TAP Support}\hfill  % Force subsequent text onto new line
 
-\label{DMS-API-REQ-0032}
-\textbf{ID:} DMS-API-REQ-0032
+\label{DMS-API-REQ-0008}
+\textbf{ID:} DMS-API-REQ-0008
 
 \textbf{Specification:}
-The API Aspect shall provide a capability for users to upload catalog data products (formatted as VOTables) residing within their allocated VOSpace, such that the catalog products after upload may be joined in queries against data release catalog products, subject to limitations of a resource quota system
+The API Aspect TAP endpoint shall support asynchronous queries as described by the IVOA TAP 1.1 specification.
 
 \textbf{Discussion:}
-Or any of the other supported formats?
+Asynchronous queries are expected to be the primary means for carrying out user-driven queries from the Portal aspect (so that the query is assigned an ID that enables multiple retrievals of its results, e.g., in both the Portal and Notebook Aspects). (The Portal Aspect implementation will still use synchronous queries for internal functions such as retrieving metadata needed for page configuration, etc.) Asynchronous queries will also be used across all aspects for queries where large result sets and/or long run times are expected.
 
-\subsubsection{Deletion from Workspace}
+\paragraph{ADQL Support}\hfill  % Force subsequent text onto new line
 
-\label{DMS-API-REQ-0033}
-\textbf{ID:} DMS-API-REQ-0033
-
-\textbf{Specification:}
-The API Aspect shall provide a capability for users to drop previously uploaded user catalog data products
-
-\subsubsection{Butler Interface to Data Products}
-
-\label{DMS-API-REQ-0034}
-\textbf{ID:} DMS-API-REQ-0034
+\label{DMS-API-REQ-0009}
+\textbf{ID:} DMS-API-REQ-0009
 
 \textbf{Specification:}
-The API Aspect shall provide connection between the Data Butler (Generation 3) instances within notebooks hosted in a LDF instance and backend file system, database, and object data stores within that same LDF instance, for the purpose of allowing notebook aspect users to access data release data products and user generated data products as Python objects
+The API Aspect TAP endpoint shall support IVOA ADQL 2.1 as a query language, \textbf{BUT} supported query syntax for database targets \textbf{MAY} be limited by practical considerations of individual underlying database technologies
 
-\textbf{Discussion:}
-See \citeds{LDM-556}.
+\subsubsection{SIA Service - Image Availability}
 
-\subsection{Performance}
+\paragraph{SIA Service for Image Availability}\hfill  % Force subsequent text onto new line
 
-Performance requirements are still being finalized.
-
-\subsection{Implementation and Deployment}
-
-\subsubsection{Containerized Deployment}
-
-\label{DMS-API-REQ-0035}
-\textbf{ID:} DMS-API-REQ-0035
+\label{DMS-API-REQ-0016}
+\textbf{ID:} DMS-API-REQ-0016
 
 \textbf{Specification:}
-The API Aspect services shall be deliverered as containerized applications.
+The API Aspect Web APIs shall include an endpoint conforming to IVOA SIA V2 for the purpose of locating available images
 
-\subsubsection{Upgradability}
+\subsubsection{SODA Service - Image Data Retrieval}
 
-\label{DMS-API-REQ-0036}
-\textbf{ID:} DMS-API-REQ-0036
+The retrieval of actual image pixel data is provided by an IVOA SODA service.  This service provides both for the retrieval of as-archived images and for the retrieval of post-processed image data such as cutouts.
 
-\textbf{Specification:}
-The API Aspect service software shall be upgradable in place with minimal user downtime.
+It is expected that some form of mosaicing service will be provided, but a specfic requirement is still to be written.
 
-\subsubsection{Logging and Monitoring}
+\paragraph{SODA Service for Image Data}\hfill  % Force subsequent text onto new line
 
-\label{DMS-API-REQ-0037}
-\textbf{ID:} DMS-API-REQ-0037
+\label{DMS-API-REQ-0017}
+\textbf{ID:} DMS-API-REQ-0017
 
 \textbf{Specification:}
-The API Aspect services shall provide logging and monitoring capabilities for the purpose of supporting service operators
+The API Aspect Web APIs shall include an endpoint conforming to IVOA SODA 1.0 for the purpose of retrieving image data.
 
-\subsection{Query Persistence}
+\paragraph{Cutout Service}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-0018}
+\textbf{ID:} DMS-API-REQ-0018
+
+\textbf{Specification:}
+The API Aspect SODA enpoint shall support performing cutouts on all released image data types, \textbf{BUT} supported filter predicates \textbf{MAY} exclude POLYGON
+
+\subsubsection{Query Persistence}
 
 Requirements in this section apply to the persistence of query texts and the limited persistence of query results.
 
-\subsubsection{Query History}
+\paragraph{Query History Retrieval}\hfill  % Force subsequent text onto new line
 
 \label{DMS-API-REQ-0038}
 \textbf{ID:} DMS-API-REQ-0038
@@ -2715,7 +2475,7 @@ The API aspect shall provide interfaces for retrieving the history of queries fo
 \textbf{Discussion:}
 This capability is essential for cross-Aspect linking, where a query is created in one Aspect and accessed, or re-executed, in another.
 
-\subsubsection{Cached Query Retrieval}
+\paragraph{Cached Query Result Retrieval}\hfill  % Force subsequent text onto new line
 
 \label{DMS-API-REQ-0039}
 \textbf{ID:} DMS-API-REQ-0039
@@ -2726,7 +2486,7 @@ The API Aspect shall provide for the caching of results of queries for a limited
 \textbf{Discussion:}
 Caching is subject to resource contraints.  The system may use a combination of a central buffer and quota from the user's Workspace to implement caching; the details are still under design.
 
-\subsubsection{Query Saving}
+\paragraph{Query Specification Retrieval}\hfill  % Force subsequent text onto new line
 
 \label{DMS-API-REQ-0040}
 \textbf{ID:} DMS-API-REQ-0040
@@ -2738,6 +2498,215 @@ The API Aspect shall provide interfaces that return an artifact containing a com
 The results of re-executing the same query depend on the database(s) being queried.  For Level 2 (Data Releases) the content of a data release is nominally frozen upon release and the same query repeated later should always return the same result.  (We assume that if a correctable error is found in a data release after its release it will only be repaired, if at all, by adding additional database(s) or table(s) with the corrected data, or just by providing correction recipies that could be applied to the results of a query.)
 For the continuously updated Level 1 database(s) update times will be recorded that will permit queries to be repeated precisely, or, optionally, with new data taken into account.
 For user databases no guarantees can be made.
+
+\subsubsection{Python Interface}
+
+\paragraph{Butler Interface to Data Products}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-0034}
+\textbf{ID:} DMS-API-REQ-0034
+
+\textbf{Specification:}
+The API Aspect shall provide connection between the Data Butler (Generation 3) instances within notebooks hosted in a LDF instance and backend file system, database, and object data stores within that same LDF instance, for the purpose of allowing notebook aspect users to access data release data products and user generated data products as Python objects
+
+\textbf{Discussion:}
+See \citeds{LDM-556}.
+
+\subsection{User Storage}
+
+Requirements for the User Database Workspace are still being developed.
+
+\subsubsection{VOSpace Service}
+
+\label{DMS-API-REQ-0019}
+\textbf{ID:} DMS-API-REQ-0019
+
+\textbf{Specification:}
+The API Aspect Web APIs shall include an endpoint conforming to IVOA VOSpace 2.0 for the purpose of persistence and retrieval of user-generated file-oriented data products in the User Workspace defined in \hyperref[DMS-LSP-REQ-0011]{DMS-LSP-REQ-0011}.
+
+\subsubsection{WebDAV Service}
+
+\label{DMS-API-REQ-0020}
+\textbf{ID:} DMS-API-REQ-0020
+
+\textbf{Specification:}
+The API Aspect Web APIs shall include an endpoint conforming to WebDAV for the purpose of persistence and retrieval of user-generated file-oriented data products in the User Workspace defined in \hyperref[DMS-LSP-REQ-0011]{DMS-LSP-REQ-0011}.
+
+\subsection{Transfer Data}
+
+\subsubsection{Tabular Data Output}
+
+Requirements in this section apply to the return of tabular data from API Aspect services.
+
+\paragraph{VOTable Output for TAP}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-0010}
+\textbf{ID:} DMS-API-REQ-0010
+
+\textbf{Specification:}
+The API Aspect TAP endpoint shall support IVOA VOTable 1.3 as an available output format
+
+\paragraph{VOTable TABLEDATA Payload}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-0011}
+\textbf{ID:} DMS-API-REQ-0011
+
+\textbf{Specification:}
+API Aspect services that support returning results in VOTable format shall support the return of a VOTable data payload in the XML-based TABLEDATA serialization.
+
+\textbf{Discussion:}
+This payload form is not intended for large tables, but is provided for compatibility with community tools.  The API Aspect TAP service may place an upper bound on the size of a table that can be returned in this format.
+
+\paragraph{VOTable BINARY2 Payload}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-0012}
+\textbf{ID:} DMS-API-REQ-0012
+
+\textbf{Specification:}
+API Aspect services that support returning results in VOTable format shall support the return of a VOTable data payload in the BINARY2 serialization.
+
+\textbf{Discussion:}
+This payload form supports larger tabular results but is most likely still not optimal for the largest queries.  The API Aspect team is still investigating additional options, including the use of the FITS serialization, as well as the use of non-VOTable formats, for efficient and metadata-rich tabular results.
+
+\paragraph{JSON Output for TAP}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-0013}
+\textbf{ID:} DMS-API-REQ-0013
+
+\textbf{Specification:}
+The API Aspect TAP endpoint shall support JSON as an alternative available output format
+
+\paragraph{CSV Output for TAP}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-0014}
+\textbf{ID:} DMS-API-REQ-0014
+
+\textbf{Specification:}
+The API Aspect TAP endpoint shall support CSV as and alternative available output format.  This output format is not required to meet requirements otherwise in force on the return of table and column metadata.
+
+\textbf{Discussion:}
+The CSV format inherently is unsuitable for returning rich metadata with a table.
+
+\paragraph{SQLite Output for TAP}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-0015}
+\textbf{ID:} DMS-API-REQ-0015
+
+\textbf{Specification:}
+The API Aspect TAP endpoint SHOULD support SQLite as an alternative available output format
+
+\textbf{Discussion:}
+The mandatory status of this requirement should be settled one way or the other as soon as possible.  It is a candidate for a efficient and readily consumed format for large results with rich metadata.
+
+\subsubsection{Workspace Interaction}
+
+\paragraph{Tabular Result Download to Workspace}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-0031}
+\textbf{ID:} DMS-API-REQ-0031
+
+\textbf{Specification:}
+The API Aspect shall provide a capability for users to save their query results as VOTables in their allocated VOSpace, subject to limitations of a resource quota system
+
+\textbf{Discussion:}
+Or any of the other supported formats?
+
+\paragraph{Tabular Upload to Workspace}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-0032}
+\textbf{ID:} DMS-API-REQ-0032
+
+\textbf{Specification:}
+The API Aspect shall provide a capability for users to upload catalog data products (formatted as VOTables) residing within their allocated VOSpace, such that the catalog products after upload may be joined in queries against data release catalog products, subject to limitations of a resource quota system
+
+\textbf{Discussion:}
+Or any of the other supported formats?
+
+\paragraph{Deletion from Workspace}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-0033}
+\textbf{ID:} DMS-API-REQ-0033
+
+\textbf{Specification:}
+The API Aspect shall provide a capability for users to drop previously uploaded user catalog data products
+
+\subsection{Performance}
+
+Performance requirements are still being finalized.
+
+\subsection{Control and Management}
+
+\subsection{Documentation}
+
+\subsection{General}
+
+\subsubsection{Identity and Security}
+
+\paragraph{Secure Protocols}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-0001}
+\textbf{ID:} DMS-API-REQ-0001
+
+\textbf{Specification:}
+The API Aspect Web APIs shall be accessible through HTTPS endpoints.
+
+\paragraph{Authentication}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-0003}
+\textbf{ID:} DMS-API-REQ-0003
+
+\textbf{Specification:}
+The API Aspect Web APIs shall accept authenticated requests for the purpose of establishing user identity.
+
+\paragraph{Authorization}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-0004}
+\textbf{ID:} DMS-API-REQ-0004
+
+\textbf{Specification:}
+The API Aspect Web APIs shall interact with project authorization infrastructure for the purpose of establishing authorized use.
+
+\paragraph{Secure Implementation}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-0005}
+\textbf{ID:} DMS-API-REQ-0005
+
+\textbf{Specification:}
+The API Aspect Web APIs shall prevent users from circumventing authorization controls.
+
+\subsubsection{Implementation}
+
+\paragraph{Containerized Deployment}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-0035}
+\textbf{ID:} DMS-API-REQ-0035
+
+\textbf{Specification:}
+The API Aspect services shall be deliverered as containerized applications.
+
+\paragraph{Result Compression}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-0002}
+\textbf{ID:} DMS-API-REQ-0002
+
+\textbf{Specification:}
+The API Aspect Web APIs shall support gzip HTTP content-encoding for the purpose of returning compressed data.
+
+\paragraph{Upgradability}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-0036}
+\textbf{ID:} DMS-API-REQ-0036
+
+\textbf{Specification:}
+The API Aspect service software shall be upgradable in place with minimal user downtime.
+
+\paragraph{Logging and Monitoring}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-0037}
+\textbf{ID:} DMS-API-REQ-0037
+
+\textbf{Specification:}
+The API Aspect services shall provide logging and monitoring capabilities for the purpose of supporting service operators
 
 \addendum
 
