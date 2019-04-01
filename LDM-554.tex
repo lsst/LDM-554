@@ -9,9 +9,9 @@
 
 %% Retrieve date and model version
 \setDocUpstreamLocation{MagicDraw SysML}
-\setDocUpstreamVersion{153}
+\setDocUpstreamVersion{223}
 
-\date{2018-06-18}
+\date{2019-04-01}
 
 %% Allow arbitrary latex to be inserted at the end of the document.
 %% Define a new version of this command in metadata.tex. It will
@@ -48,6 +48,7 @@
 \maketitle
 
 These requirements set out the major components of the LSST Science Platform (LSP).
+
 \section{Science Platform}
 
 \subsection{Overview}
@@ -746,7 +747,7 @@ The Portal aspect shall support list-based positional queries, with the coordina
 \textbf{Discussion:}
 Lists of positions may be uploaded or taken from the Workspace.  Efficient implementation of list-based queries requires a corresponding API aspect / Data Access Web API service, to avoid the submission of large numbers of separate queries.
 The system is not required to, but may, accept lists in which different elements are specified in more than one of the supported means of specifying positions; e.g., it is not required to support a list that is partially in equatorial coordinates and partially in LSST object IDs, because of the parsing and interpretation complexities involved.  The implementation should not preclude adding the ability to mix specification types later on, guided by feedback from the user community as to what is most useful.
-Specific coordinates required elsewhere in this document include "equatorial, ecliptic or galactic coordinates" in DMS-PRTL-REQ-0020 and DMS-PRTL-REQ-0022, "astrophysical source name" (DMS-PRTL-REQ-0023), "LSST catalog entry identifiers" (DMS-PRTL-REQ-0024), and "external Solar System Object identifiers" (DMS-PRTL-REQ-0025).
+Specific coordinates required elsewhere in this document include "equatorial, ecliptic or galactic coordinates" in \hyperref[DMS-PRTL-REQ-0020]{DMS-PRTL-REQ-0020} and \hyperref[DMS-PRTL-REQ-0022]{DMS-PRTL-REQ-0022}, "astrophysical source name" (\hyperref[DMS-PRTL-REQ-0023]{DMS-PRTL-REQ-0023}), "LSST catalog entry identifiers" (\hyperref[DMS-PRTL-REQ-0024]{DMS-PRTL-REQ-0024}), and "external Solar System Object identifiers" (\hyperref[DMS-PRTL-REQ-0025]{DMS-PRTL-REQ-0025}).
 
 \textbf{\textit{Positional Query: Astrophysical Coordinate Systems}}
 
@@ -2348,6 +2349,7 @@ The API Aspect shall provide for retrieval of all reference catalog data via TAP
 
 \textbf{Discussion:}
 This requirement is not to imply \textit{linkage} of reference catalogs/images, but should be interpreted to mean that the reference catalogs that we use will also be queryable.
+\\
 
 \subsubsection{Access to Virtual Data Products}
 
