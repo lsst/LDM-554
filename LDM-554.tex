@@ -1369,60 +1369,120 @@ Often the default color and position of the overlay needs to be changed for clar
 
 \subsubsection{All-Sky Visualization}
 
-\paragraph{Display All-Sky HEALPix Image}\hfill  % Force subsequent text onto new line
+% BEGIN CHANGES FROM RFC-700 IMPLEMENTATION
+
+\paragraph{Display All-Sky HiPS Image}\hfill  % Force subsequent text onto new line
 
 \label{DMS-PRTL-REQ-0078}
-\textbf{ID:} DMS-PRTL-REQ-0078
+\textbf{ID:} DMS-PRTL-REQ-0078 (Priority: 1b)
 
 \textbf{Specification:}
-The Portal aspect shall be able to display an all-sky image in the HEALPix format.
+The Portal aspect shall be able to display an all-sky image in the IVOA HiPS format.
 
 \textbf{Discussion:}
 In addition to flux images such as all-sky coadds, the LSST pipelines and/or quality assessment processes may generate a variety of all-sky metrics, diagnostics, and other artifacts in this format.
 
-\paragraph{Zoom In and Out on a HEALPix Image}\hfill  % Force subsequent text onto new line
+\textit{Derived from requirements:}
+
+DMS-REQ-0382: HiPS Visualization
+
+\paragraph{Zoom In and Out on a HiPS Image}\hfill  % Force subsequent text onto new line
 
 \label{DMS-PRTL-REQ-0079}
-\textbf{ID:} DMS-PRTL-REQ-0079
+\textbf{ID:} DMS-PRTL-REQ-0079 (Priority: 1b)
 
 \textbf{Specification:}
-The Portal aspect shall enable a user to zoom in and out on a HEALPix all-sky image.
+The Portal aspect shall enable a user to zoom in and out on a HiPS all-sky image.
 
 \textbf{Discussion:}
 The zooming in and out will enable a user to change effective spatial resolution of the image on the screen, tranferring across levels of the image hierarchy.
 
-\paragraph{Pan Around on a HEALPix Image}\hfill  % Force subsequent text onto new line
+\textit{Derived from requirements:}
+
+DMS-REQ-0382: HiPS Visualization
+
+\paragraph{Pan Around on a HiPS Image}\hfill  % Force subsequent text onto new line
 
 \label{DMS-PRTL-REQ-0080}
-\textbf{ID:} DMS-PRTL-REQ-0080
+\textbf{ID:} DMS-PRTL-REQ-0080 (Priority: 1b)
 
 \textbf{Specification:}
-The Portal aspect shall enable a user to move around within a HEALPix all-sky image when the full image is not displayed on the screen.
+The Portal aspect shall enable a user to move around within a HiPS all-sky image when the full image is not displayed on the screen.
 
 \textbf{Discussion:}
 The panning is intended to enable a user to move around on the sky with a fixed zoom level.  Panning does not apply if the full all-sky image is visible on the screen.
 
+\textit{Derived from requirements:}
+
+DMS-REQ-0382: HiPS Visualization
+
 \paragraph{HEALPix Pixel Selection}\hfill  % Force subsequent text onto new line
 
 \label{DMS-PRTL-REQ-0081}
-\textbf{ID:} DMS-PRTL-REQ-0081
+\textbf{ID:} DMS-PRTL-REQ-0081 (Priority: 2)
 
 \textbf{Specification:}
-The Portal aspect shall enable a user to select individual HEALPix pixels or groups of pixels and obtain references to them which can be used in other LSP aspects.
+When displaying a HiPS image, the Portal aspect shall enable a user to select individual HEALPix pixels or groups of pixels and obtain references to them which can be used in other LSP aspects.
 
 \textbf{Discussion:}
 UI selection of pixels, at selectable scales, can be done in the Portal, with the selections then used in other aspects.
+A likely implementation would allow copying to the clipboard a HEALPix pixel ID in NEST or NUNIQ form in the Portal UI, and pasting it into appropriate locations in the other Aspects.
+
+\textit{Derived from requirements:}
+
+DMS-LSP-REQ-0005: Linkage of Aspects
 
 \paragraph{Retrieve HEALPix-Associated Data}\hfill  % Force subsequent text onto new line
 
 \label{DMS-PRTL-REQ-0082}
-\textbf{ID:} DMS-PRTL-REQ-0082
+\textbf{ID:} DMS-PRTL-REQ-0082 (Priority: 2)
 
 \textbf{Specification:}
-The Portal aspect shall enable a user to retrieve metadata and data associated with selected HEALPixels and display that information as tabular or image data as appropriate.
+When displaying a HiPS image, the Portal aspect shall enable a user to retrieve metadata and data associated with selected HEALPixels and display that information as tabular or image data as appropriate.
 
 \textbf{Discussion:}
 The HEALPix pixels will be associated with metadata (e.g., which objects are associated with that position on the sky) or data (e.g., what is the FWHM of all of the sources within that pixel on the sky).  That metadata/data will be retrievable via a selection of the HEALPix pixels.
+
+A likely design might involve the publication of IVOA DataLink service descriptors along with a HiPS image dataset, providing for the creation of queries on the fly once a HEALPix pixel has been selected in the UI.
+
+\textit{Derived from requirements:}
+
+DMS-PRTL-REQ-0004: Semantic Linkage: Portal Workflows
+
+% BEGIN ADDITIONS FROM RFC-700 IMPLEMENTATION
+
+\paragraph{HiPS Linkage to Coadds}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-xx01-RFC-700}
+\textbf{ID:} DMS-PRTL-REQ-xx01-RFC-700 (Priority: 2)
+
+\textbf{Specification:}
+The Portal Aspect shall provide a means for linkage from a HiPS visualization to the underlying LSST coadded images.
+This SHOULD be implemented using a mechanism supported by both the LSST Science Platform and by community tools.
+
+\textbf{Discussion:}
+It is intended that this be done using the ``HiPS Progenitor'' mechanism introduced at the May 2018 IVOA meeting, or an evolution of it that emerges from the IVOA standardization process.
+
+\textit{Derived from requirements:}
+
+DMS-REQ-0381: HiPS Linkage to Coadds
+
+\paragraph{Display MOC Data}\hfill  % Force subsequent text onto new line
+
+\label{DMS-PRTL-REQ-xx02-RFC-700}
+\textbf{ID:} DMS-PRTL-REQ-xx02-RFC-700 (Priority: 1b)
+
+\textbf{Specification:}
+The Portal Aspect shall support the visualization of the LSST-generated MOCs as well as other MOCs which satisfy the IVOA MOC Recommendation.
+
+\textbf{Discussion:}
+We are considering the provision of services which allow computations based on MOCs, e.g., the use of a MOC from another mission or survey to define a query on the LSST data, but this is not ready for codification at this time.
+
+\textit{Derived from requirements:}
+
+DMS-REQ-0385: Display MOC Data
+
+% END CHANGES FROM RFC-700 IMPLEMENTATION
 
 \subsubsection{Coordinate Display Tools}
 
@@ -2170,6 +2230,26 @@ The Notebook Aspect shall provide a tool for displaying image like datasets prod
 \textbf{Discussion:}
 This requirement could be satisfied simply by inclusion of afw.display in the pre-installed stack.  However, it is anticpated that we will also provide a way to use Portal Aspect Javascript components in JupyterLab.
 
+% BEGIN ADDITION FROM RFC-700 IMPLEMENTATION
+
+\paragraph{All-Sky Map Visualization}\hfill  % Force subsequent text onto new line
+
+\label{DMS-NB-REQ-xx01-RFC-700}
+\textbf{ID:} DMS-NB-REQ-xx01-RFC-700 (Priority: 1b)
+
+\textbf{Specification:}
+The Notebook Aspect shall provide tools for the visualization of the all-sky HiPS and MOC data products produced for the survey.
+
+\textbf{Discussion:}
+This can be satisfied by providing access to the Portal Aspect JavaScript components providing these services and/or by incorporating community open-source libraries for HiPS and MOC visualization in the Notebook Aspect user environment.
+
+\textit{Derived from requirements:}
+
+DMS-REQ-0382: HiPS Visualization\\
+DMS-REQ-0385: Display MOC Data
+
+% END ADDITION FROM RFC-700 IMPLEMENTATION
+
 \subsubsection{Scientific Plotting}
 
 \label{DMS-NB-REQ-0033}
@@ -2315,6 +2395,27 @@ the provision of tables exposing the CAOM2 data model (see DMS-API-REQ-0021), an
 
 \textbf{Discussion:}  % ADDED FOR RFC-652 IMPLEMENTATION
 Existing community experience, such as at CADC, is that it is possible to provide an ObsTAP service as a view on a join of CAOM2 tables.
+
+% BEGIN ADDITION FROM RFC-700 IMPLEMENTATION
+
+\subsubsection{Access to All-Sky Dataset Metadata}
+
+\label{DMS-API-REQ-xx02-RFC-700}
+\textbf{ID:} DMS-API-REQ-xx02-RFC-700 (Priority: 2)
+
+\textbf{Specification:}
+The API Aspect shall provide a metadata service allowing discovery of the available all-sky HiPS and MOC datasets produced from the survey.
+
+\textbf{Discussion:}
+IVOA standards in this area are somewhat lacking. There are conventions established by CDS for their hosting of lists of HiPS and MOC datasets created by the community. We may wish to use those in addition to providing our own. It would also be reasonable to provide access to ObsCore-style metadata (e.g., for wavelength and time coverage ranges) for these datasets. The project should engage with the community to develop a useful approach. The issue of versioning the data products from Data Release to Data Release should be addressed.
+
+This requirement is Priority 2 despite the higher priority of the parent requirement in order to acknowledge the absence of clear existing standards, and because it should be possible to provide basic access to HiPS datasets in a more hard-coded manner at first.
+
+\textit{Derived from requirements:}
+
+DMS-REQ-0380: HiPS Service
+
+% END ADDITION FROM RFC-700 IMPLEMENTATION
 
 \subsubsection{Access to Catalog Data Products}
 
@@ -2487,6 +2588,54 @@ The API Aspect Web APIs shall include an endpoint conforming to IVOA SODA 1.0 fo
 
 \textbf{Specification:}
 The API Aspect SODA enpoint shall support performing cutouts on all released image data types, \textbf{BUT} supported filter predicates \textbf{MAY} exclude POLYGON
+
+% BEGIN ADDITIONS FROM RFC-700 IMPLEMENTATION
+
+\subsubsection{Serve All-Sky Data}
+
+\paragraph{Serve HiPS Image Data}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-xx03-RFC-700}
+\textbf{ID:} DMS-API-REQ-xx03-RFC-700 (Priority: 1b)
+
+\textbf{Specification:}
+The API Aspect shall provide a secure and authenticated Internet endpoint for an IVOA-compliant HiPS service for each published LSST HiPS image map.
+
+\textbf{Discussion:}
+The DM HiPS service will be available only to data rights holders. LSST EPO will also operate a world-public HiPS service, but with its spatial resolution limited to approximately one arcsecond. Note that a ``HiPS service'' can be as simple as a static file tree exposed through a simple web server.
+
+\textit{Derived from requirements:}
+
+DMS-REQ-0380: HiPS Service
+
+\paragraph{Register HiPS Service}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-xx04-RFC-700}
+\textbf{ID:} DMS-API-REQ-xx04-RFC-700 (Priority: 1b)
+
+\textbf{Specification:}
+The API Aspect shall ensure that its HiPS services are advertised via Registry as well as in the HiPS community mechanism operated by CDS, or whatever equivalent mechanism may exist in the LSST operations era.
+
+\textit{Derived from requirements:}
+
+DMS-REQ-0380: HiPS Service
+
+\paragraph{Serve MOC Data}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-xx05-RFC-700}
+\textbf{ID:} DMS-API-REQ-xx05-RFC-700 (Priority: 1b)
+
+\textbf{Specification:}
+The API Aspect shall provide a secure and authenticated Internet endpoint, or endpoints, providing access to the MOC data available for the LSST survey, in at least the FITS format specified by the MOC standard.
+
+\textbf{Discussion:}
+The MOC data corresponding to LSST-published HiPS maps will, per the HiPS standard, be available through the HiPS service endpoint(s). However, as of early 2020, there is no existing IVOA standard for the service of additional MOCs. The project should participate in community efforts to develop and implement such standards.
+
+\textit{Derived from requirements:}
+
+DMS-REQ-0384: Export MOCs as FITS
+
+% END ADDITIONS FROM RFC-700 IMPLEMENTATION
 
 \subsubsection{Query Persistence}
 
