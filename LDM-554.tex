@@ -2715,13 +2715,24 @@ The API Aspect Web APIs shall include an endpoint conforming to WebDAV for the p
 
 Requirements in this section apply to the return of tabular data from API Aspect services.
 
-\paragraph{VOTable Output for TAP}\hfill  % Force subsequent text onto new line
+% BEGIN MODIFICATION FROM RFC-704 IMPLEMENTATION
+
+\paragraph{VOTable Output from API Aspect Services}\hfill  % Force subsequent text onto new line
 
 \label{DMS-API-REQ-0010}
-\textbf{ID:} DMS-API-REQ-0010
+\textbf{ID:} DMS-API-REQ-0010 (Priority: 1a)
 
 \textbf{Specification:}
-The API Aspect TAP endpoint shall support IVOA VOTable 1.3 as an available output format
+API Aspect services based on IVOA standards (e.g., TAP, SIAv2) which return tabular data shall support IVOA VOTable, version 1.4 or later, as their default output format, unless otherwise specified in the applicable protocol standard.
+
+\textbf{Discussion:}
+VOTable 1.4 is specified in order to support the return of TIMESYS and COOSYS elements defining the coordinate systems used. The ``unless otherwise specified'' provides an exception for Simple Cone Search, which is written in a way that formally doesn't permit VOTable versions beyond 1.1 (fixing this is the subject of a proposed change to the SCS standard).
+
+\textit{Derived from requirements:}
+
+DMS-REQ-0078: Catalog Export Formats
+
+% END MODIFICATION FROM RFC-704 IMPLEMENTATION
 
 \paragraph{VOTable TABLEDATA Payload}\hfill  % Force subsequent text onto new line
 
