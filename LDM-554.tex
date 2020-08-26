@@ -9,9 +9,9 @@
 
 %% Retrieve date and model version
 \setDocUpstreamLocation{MagicDraw SysML}
-\setDocUpstreamVersion{223}
+\setDocUpstreamVersion{223-redline}
 
-\date{2019-04-01}
+\date{2020-08-26}
 
 %% Allow arbitrary latex to be inserted at the end of the document.
 %% Define a new version of this command in metadata.tex. It will
@@ -2309,8 +2309,12 @@ The API Aspect Web APIs shall present image and visit metadata organized in acco
 \label{DMS-API-REQ-0022}
 \textbf{ID:} DMS-API-REQ-0022
 
-\textbf{Specification:}
-The API Aspect shall provide for retrieval of image and visit metadata via TAP ADQL queries.
+\textbf{Specification:}  % MODIFIED FOR RFC-652 IMPLEMENTATION
+The API Aspect shall provide for retrieval of image and visit metadata via TAP ADQL queries, including both
+the provision of tables exposing the CAOM2 data model (see DMS-API-REQ-0021), and an ObsTAP service exposing an IVOA ObsCore-compliant, simplified data model for the image and visit metadata, meeting at least version 1.1 of the ObsCore standard.
+
+\textbf{Discussion:}  % ADDED FOR RFC-652 IMPLEMENTATION
+Existing community experience, such as at CADC, is that it is possible to provide an ObsTAP service as a view on a join of CAOM2 tables.
 
 \subsubsection{Access to Catalog Data Products}
 
@@ -2433,6 +2437,22 @@ Asynchronous queries are expected to be the primary means for carrying out user-
 \textbf{Specification:}
 The API Aspect TAP endpoint shall support IVOA ADQL 2.1 as a query language, \textbf{BUT} supported query syntax for database targets \textbf{MAY} be limited by practical considerations of individual underlying database technologies
 
+% BEGIN INSERTION FROM RFC-651
+
+\paragraph{TAP Service Temporary Table Upload}\hfill  % Force subsequent text onto new line
+
+\label{DMS-API-REQ-xx01-RFC-651}
+\textbf{ID:} DMS-API-REQ-xx01-RFC-651
+
+\textbf{Specification:}
+The API Aspect TAP service shall support the standard UPLOAD parameter for the use of temporary, user-uploaded tables in ADQL expressions.
+Such temporary tables shall be able to be joined (including both ID-equality and spatial joins) against the principal LSST catalog data products.
+
+\textbf{Discussion:}
+This requirement is distinct from requirements for a User Database Workspace for persistent, user-created databases (e.g., DMS-API-REQ-0032).
+
+% END INSERTION FROM RFC-651
+
 \subsubsection{SIA Service - Image Availability}
 
 \paragraph{SIA Service for Image Availability}\hfill  % Force subsequent text onto new line
@@ -2441,7 +2461,10 @@ The API Aspect TAP endpoint shall support IVOA ADQL 2.1 as a query language, \te
 \textbf{ID:} DMS-API-REQ-0016
 
 \textbf{Specification:}
-The API Aspect Web APIs shall include an endpoint conforming to IVOA SIA V2 for the purpose of locating available images
+The API Aspect Web APIs shall include an endpoint conforming to IVOA SIA V2 for the purpose of locating available images.
+
+\textbf{Discussion:}  % ADDED FOR RFC-652 IMPLEMENTATION
+The SIA service should present the same ObsCore view of the image and visit metadata that is provided by the ObsTAP service (see DMS-API-REQ-0022), subject to the restriction on dataproduct_type from Section 2.1.14 of the SIAv2 standard.
 
 \subsubsection{SODA Service - Image Data Retrieval}
 
