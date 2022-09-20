@@ -2384,17 +2384,26 @@ Access to the Notebook Aspect shall support access using IPv6 protocols.
 \textbf{Specification:}
 The API Aspect Web APIs shall present image and visit metadata organized in accordance with the CAOM2 data model.
 
-\subsubsection{Access to Image and Visit Metadata}
+\subsubsection{Access to Image and Visit Metadata: ObsTAP}
 
 \label{DMS-API-REQ-0022}
 \textbf{ID:} DMS-API-REQ-0022
 
 \textbf{Specification:}  % MODIFIED FOR RFC-652 IMPLEMENTATION
-The API Aspect shall provide for retrieval of image and visit metadata via TAP ADQL queries, including both
-the provision of tables exposing the CAOM2 data model (see DMS-API-REQ-0021), and an ObsTAP service exposing an IVOA ObsCore-compliant, simplified data model for the image and visit metadata, meeting at least version 1.1 of the ObsCore standard.
+The API Aspect shall provide for retrieval of image and visit metadata via TAP ADQL queries,
+including an ObsTAP service exposing an IVOA ObsCore-compliant, simplified data model for the image and visit metadata, meeting at least version 1.1 of the ObsCore standard.
 
 \textbf{Discussion:}  % ADDED FOR RFC-652 IMPLEMENTATION
 Existing community experience, such as at CADC, is that it is possible to provide an ObsTAP service as a view on a join of CAOM2 tables.
+It is also acceptable to provide a materialized ``ivoa.ObsCore'' table for the ObsTAP service.
+
+\subsubsection{Access to Image and Visit Metadata: CAOM2}  % ADDED FOR RFC-652 IMPLEMENTATION
+
+\label{DMS-API-REQ-xx06-RFC-652}
+\textbf{ID:} DMS-API-REQ-xx06-RFC-652
+
+\textbf{Specification:}
+The API Aspect shall provide for retrieval of CAOM2-based image and visit metadata (see DMS-API-REQ-0021) via TAP ADQL queries.
 
 % BEGIN ADDITION FROM RFC-700 IMPLEMENTATION
 
